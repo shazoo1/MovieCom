@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Web", "MovieCom\MovieCom.Web.csproj", "{D46A7ED9-0C00-441D-BEB3-A6C7E2D08365}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Web", "MovieCom.Web\MovieCom.Web.csproj", "{D46A7ED9-0C00-441D-BEB3-A6C7E2D08365}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AC8258C2-4892-4205-9339-C7A741BFD4C8} = {AC8258C2-4892-4205-9339-C7A741BFD4C8}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Domain", "Domain\MovieCom.Domain.csproj", "{14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Domain", "MovieCom.Domain\MovieCom.Domain.csproj", "{14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Persistence", "Persistence\MovieCom.Persistence.csproj", "{18D593CC-383D-4443-B712-4FCF292C7A65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Persistence", "MovieCom.Persistence\MovieCom.Persistence.csproj", "{18D593CC-383D-4443-B712-4FCF292C7A65}"
 	ProjectSection(ProjectDependencies) = postProject
 		{14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F} = {14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Service", "Service\MovieCom.Service.csproj", "{AC8258C2-4892-4205-9339-C7A741BFD4C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Service", "MovieCom.Service\MovieCom.Service.csproj", "{AC8258C2-4892-4205-9339-C7A741BFD4C8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F} = {14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F}
 	EndProjectSection

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace MovieCom
+namespace MovieCom.Web
 {
     public class BundleConfig
     {
