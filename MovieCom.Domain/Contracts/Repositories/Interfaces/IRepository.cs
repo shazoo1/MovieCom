@@ -8,12 +8,13 @@ using MovieCom.Domain.Models.Entities;
 
 namespace MovieCom.Domain.Contracts.Repositories.Interfaces
 {
-    public interface IRepository<T> : IRepository where T : BaseEntity
+    public interface IBaseRepository<T> : IRepository where T : BaseEntity
     {
         IQueryable GetAll();
         T GetById(Guid id);
         IQueryable GetAllWhere(params Expression<Func<T, bool>>[] predicates);
         void Add(T item);
+        void Add(IEnumerable<T> items);
         void Update(T item);
         void Remove(T item);
         void Remove(Guid id);

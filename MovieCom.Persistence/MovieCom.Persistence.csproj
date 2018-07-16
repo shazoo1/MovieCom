@@ -92,7 +92,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\MovieCom.Domain.csproj">
+    <ProjectReference Include="..\MovieCom.Domain\MovieCom.Domain.csproj">
       <Project>{14c02eb7-ad9e-4cbe-87ef-6f6bfce54f5f}</Project>
       <Name>MovieCom.Domain</Name>
     </ProjectReference>

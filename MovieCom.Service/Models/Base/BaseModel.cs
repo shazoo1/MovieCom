@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieCom.Domain.Enums
+namespace Service.Models.Base
 {
-    public enum MediaType
+    public abstract class BaseModel
     {
-        Image,
-        Trailer,
-        Poster
+        public Guid Id { get; set; }
     }
 }

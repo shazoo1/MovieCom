@@ -10,7 +10,7 @@ namespace MovieCom.Domain.Contracts
 {
     public interface IUnitOfWork
     {
-        IRepository<T> Get<T>() where T : BaseEntity;
+        IBaseRepository<T> Get<T>() where T : BaseEntity;
         Task<int> SaveChangesAsync();
         int SaveChanges();
     }

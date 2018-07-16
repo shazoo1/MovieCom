@@ -19,13 +19,13 @@ namespace MovieCom.Persistence
             _repositories = new Dictionary<Type, IRepository>();
         }
 
-        public IRepository<T> Get<T>() where T : BaseEntity
+        public IBaseRepository<T> Get<T>() where T : BaseEntity
         {
             if (!_repositories.ContainsKey(typeof(T)))
             {
-                _repositories.Add(typeof(T), (IRepository<T>)Activator.CreateInstance(typeof(T), _context));
+                _repositories.Add(typeof(T), (IBaseRepository<T>)Activator.CreateInstance(typeof(T), _context));
             }
-            return (IRepository<T>)_repositories[typeof(T)];
+            return (IBaseRepository<T>)_repositories[typeof(T)];
         }
 
         public int SaveChanges()

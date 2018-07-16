@@ -76,6 +76,8 @@
   <ItemGroup>
     <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Contracts\Repositories\Interfaces\IRepository.cs" />
+    <Compile Include="Contracts\Services\Base\IBaseService.cs" />
+    <Compile Include="Contracts\Services\IMovieService.cs" />
     <Compile Include="Enums\MediaType.cs" />
     <Compile Include="Models\Entities\Actor.cs" />
     <Compile Include="Models\Entities\BaseEntity.cs" />
@@ -91,9 +93,7 @@
     <Compile Include="Models\Identity\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\DTO\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
