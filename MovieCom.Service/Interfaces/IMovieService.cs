@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Contracts.Services.Base;
 using MovieCom.Domain.Models.Entities;
+using MovieCom.Service.Interfaces.Base;
+using MovieCom.Service.Models;
 
-namespace Domain.Contracts.Services
+namespace MovieCom.Service.Interfaces
 {
     public interface IMovieService : IBaseService<Movie>
     {

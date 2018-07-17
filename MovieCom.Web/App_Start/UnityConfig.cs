@@ -1,12 +1,14 @@
 using System;
-using Domain.Contracts.Services;
+using AutoMapper;
 using MovieCom.Domain.Contracts;
 using MovieCom.Persistence;
-using Service.Services;
+using MovieCom.Service.Interfaces;
+using MovieCom.Service.Services;
+using MovieCom.Web.Mapping;
 using Unity;
 using Unity.AspNet.Mvc;
 
-namespace MovieCom
+namespace MovieCom.Web
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.
@@ -50,6 +52,9 @@ namespace MovieCom
 
             //TODO :: Register services
             container.RegisterType<IMovieService, MovieService>();
+
+            //TODO :: Register instances
+            container.RegisterInstance(Configuration.Create());
         }
     }
 }

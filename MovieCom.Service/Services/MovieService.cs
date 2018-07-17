@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Domain.Contracts.Services;
 using MovieCom.Domain.Contracts;
 using MovieCom.Domain.Models.Entities;
-using Service.Services.Base;
+using MovieCom.Service.Interfaces;
+using MovieCom.Service.Services.Base;
 
-namespace Service.Services
+namespace MovieCom.Service.Services
 {
     public class MovieService : BaseService<Movie>, IMovieService
     {

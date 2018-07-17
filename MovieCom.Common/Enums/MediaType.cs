@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieCom.Domain.Enums
+namespace MovieCom.Common.Enums
 {
     public enum MediaType
     {

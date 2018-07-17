@@ -5,21 +5,29 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Web", "MovieCom.Web\MovieCom.Web.csproj", "{D46A7ED9-0C00-441D-BEB3-A6C7E2D08365}"
 	ProjectSection(ProjectDependencies) = postProject
+		{66594E7F-A060-4905-AD6E-F2BE0C6E4800} = {66594E7F-A060-4905-AD6E-F2BE0C6E4800}
 		{14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F} = {14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F}
 		{AC8258C2-4892-4205-9339-C7A741BFD4C8} = {AC8258C2-4892-4205-9339-C7A741BFD4C8}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Domain", "MovieCom.Domain\MovieCom.Domain.csproj", "{14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{66594E7F-A060-4905-AD6E-F2BE0C6E4800} = {66594E7F-A060-4905-AD6E-F2BE0C6E4800}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Persistence", "MovieCom.Persistence\MovieCom.Persistence.csproj", "{18D593CC-383D-4443-B712-4FCF292C7A65}"
 	ProjectSection(ProjectDependencies) = postProject
+		{66594E7F-A060-4905-AD6E-F2BE0C6E4800} = {66594E7F-A060-4905-AD6E-F2BE0C6E4800}
 		{14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F} = {14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Service", "MovieCom.Service\MovieCom.Service.csproj", "{AC8258C2-4892-4205-9339-C7A741BFD4C8}"
 	ProjectSection(ProjectDependencies) = postProject
+		{66594E7F-A060-4905-AD6E-F2BE0C6E4800} = {66594E7F-A060-4905-AD6E-F2BE0C6E4800}
 		{14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F} = {14C02EB7-AD9E-4CBE-87EF-6F6BFCE54F5F}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieCom.Common", "MovieCom.Common\MovieCom.Common.csproj", "{66594E7F-A060-4905-AD6E-F2BE0C6E4800}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +51,10 @@ Global
 		{AC8258C2-4892-4205-9339-C7A741BFD4C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC8258C2-4892-4205-9339-C7A741BFD4C8}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC8258C2-4892-4205-9339-C7A741BFD4C8}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{66594E7F-A060-4905-AD6E-F2BE0C6E4800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66594E7F-A060-4905-AD6E-F2BE0C6E4800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66594E7F-A060-4905-AD6E-F2BE0C6E4800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66594E7F-A060-4905-AD6E-F2BE0C6E4800}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

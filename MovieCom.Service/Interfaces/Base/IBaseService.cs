@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MovieCom.Domain.Models.Entities;
-
-namespace Domain.Contracts.Services.Base
+using MovieCom.Service.Models.Base;
+namespace MovieCom.Service.Interfaces.Base
 {
     public interface IBaseService<T> where T : BaseEntity
     {

@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Web.Mvc;
-
+using MovieCom.Web;
 using Unity.AspNet.Mvc;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MovieCom.UnityMvcActivator), nameof(MovieCom.UnityMvcActivator.Start))]

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Models.Base
+namespace MovieCom.Service.Models.Base
 {
     public abstract class BaseModel
     {

@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MovieCom.Web.Models;
+using MovieCom.Domain.Entities.Identity;
 
 namespace MovieCom.Web.Controllers
 {

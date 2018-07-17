@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Domain.Contracts.Services.Base;
 using MovieCom.Domain.Contracts;
 using MovieCom.Domain.Models.Entities;
+using MovieCom.Service.Interfaces.Base;
 
-namespace Service.Services.Base
+namespace MovieCom.Service.Services.Base
 {
     public abstract class BaseService<T> : IBaseService<T> where T : BaseEntity
     {

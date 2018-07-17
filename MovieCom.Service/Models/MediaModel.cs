@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MovieCom.Common.Enums;
+using MovieCom.Service.Models.Base;
 
-namespace MovieCom.Domain.Models.Entities
+namespace MovieCom.Service.Models
 {
-    public class Media : BaseEntity
+    public class MediaModel : BaseModel
     {
         public string Link { get; set; }
         public MediaType Type { get; set; }

@@ -14,7 +14,7 @@ namespace MovieCom.Persistence.Mapping
         {
             ToTable("Movies");
             HasKey(x => x.Id);
-
+            
             HasOptional(x => x.Poster);
             HasMany(x => x.Actors)
                 .WithMany(y => y.Movies);
@@ -24,6 +24,10 @@ namespace MovieCom.Persistence.Mapping
             HasMany(x => x.Comments)
                 .WithOptional(y => y.Movie);
             HasMany(x => x.Grades);
+
+            Property(x => x.Title)
+                .IsRequired()
+                .HasMaxLength(100);
 
             Property(x => x.Slogan)
                 .IsRequired()
