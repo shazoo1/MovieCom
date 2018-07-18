@@ -5,12 +5,15 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using MovieCom.Domain.Models.Entities;
 using MovieCom.Persistence.Mapping;
 using Persistence.Mapping;
+using MovieCom.Domain.Contracts;
 
 namespace MovieCom.Persistence
 {
-    public class MovieComDbContext : IdentityDbContext<User, Role, Guid, UserLogin, UserRole, UserClaim>
+    public class MovieComDbContext : IdentityDbContext<User, Role, Guid, UserLogin, UserRole, UserClaim>, IMovieComDbContext
     {
-        public MovieComDbContext() : base("MovieComDbContext") { }
+        public MovieComDbContext() : base("MovieComDbContext") {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MovieComDbContext, Configuration>());
+        }
 
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Comment> Comments { get; set; }

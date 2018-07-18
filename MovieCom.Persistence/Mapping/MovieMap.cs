@@ -30,7 +30,6 @@ namespace MovieCom.Persistence.Mapping
                 .HasMaxLength(100);
 
             Property(x => x.Slogan)
-                .IsRequired()
                 .HasMaxLength(150);
 
             Property(x => x.Description)

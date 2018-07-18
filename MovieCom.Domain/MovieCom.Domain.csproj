@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IMovieComDbContext.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Contracts\Repositories\Interfaces\IRepository.cs" />
     <Compile Include="Models\Entities\Actor.cs" />
@@ -89,6 +90,8 @@
     <Compile Include="Models\Identity\Role.cs" />
     <Compile Include="Models\Identity\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Store\RoleStore.cs" />
+    <Compile Include="Store\UserStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieCom.Common\MovieCom.Common.csproj">

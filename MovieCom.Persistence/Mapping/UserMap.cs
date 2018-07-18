@@ -16,7 +16,6 @@ namespace Persistence.Mapping
             ToTable("Users");
 
             HasKey(x => x.Id);
-            Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }
 }

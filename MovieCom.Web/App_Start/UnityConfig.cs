@@ -49,12 +49,13 @@ namespace MovieCom.Web
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IUnitOfWork, UnitOfWork>(new PerRequestLifetimeManager());
+            container.RegisterType<IMovieComDbContext, MovieComDbContext>();
 
             //TODO :: Register services
             container.RegisterType<IMovieService, MovieService>();
 
             //TODO :: Register instances
-            container.RegisterInstance(Configuration.Create());
+            container.RegisterInstance(Mapping.Configuration.Create());
         }
     }
 }

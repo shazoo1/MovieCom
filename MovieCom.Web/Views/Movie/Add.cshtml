@@ -1,12 +1,22 @@
-﻿
+﻿@model MovieCom.Web.Models.Movie.AddMovieViewModel
 @{
     ViewBag.Title = "Add";
 }
 
 <h2>Добавить фильм</h2>
 <div>
-@using (Html.BeginForm("Add", "Movie", FormMethod.Post))
-{
+    @using (Html.BeginForm("Add", "Movie", FormMethod.Post))
+    {
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title)
+        @Html.ValidationMessageFor(m => m.Title)
 
-}
+        @Html.LabelFor(m => m.Slogan)
+        @Html.TextBoxFor(m => m.Slogan)
+        @Html.ValidationMessageFor(m => m.Slogan)
+
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description);
+        @Html.ValidationMessageFor(m => m.Description)
+    }
 </div>
