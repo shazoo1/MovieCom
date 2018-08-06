@@ -13,5 +13,7 @@ namespace MovieCom.Service.Interfaces
     {
         IEnumerable<ActorModel> GetAll();
         IEnumerable<ActorModel> GetByIds(IEnumerable<Guid> guids);
+
+        ActorModel GetById(Guid id);
     }
 }

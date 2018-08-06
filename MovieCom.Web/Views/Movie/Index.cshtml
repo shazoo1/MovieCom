@@ -5,21 +5,26 @@
 
 <h2>Список фильмов</h2>
 
-<table>
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>Название</th>
-            <th>IMDB</th>
+            <th scope="col">Название</th>
+            <th scope="col">Год</th>
+            <th scope="col">Рейтинг IMDB</th>
+            <th scope="col">Пользоавтельский рейтинг</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var movie in Model.Movies)
         {
-            <tr>
-                @Html.ActionLink(movie.Title, "Edit", "Movie", new { id = movie.Id}, null)
-                <td>@Html.DisplayFor(modelItem => movie.Title)</td>
-                <td>@Html.DisplayFor(modelItem => movie.Imdb)</td>
+            
+            <tr onclick="location.href = '@Url.Action("Edit", "Movie", new { id = movie.Id})'">
+                <td scope="row">@Html.DisplayFor(modelItem => movie.Title)</td>
+                <td scope="row">@Html.DisplayFor(modelItem => movie.Year)</td>
+                <td scope="row">@Html.DisplayFor(modelItem => movie.Imdb)</td>
+                <td scope="row">@Html.DisplayFor(modelItem => movie.Rating)</td>
             </tr>
+        
         }
     </tbody>
 </table>

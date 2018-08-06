@@ -1,0 +1,35 @@
+﻿@model MovieCom.Web.Models.Actors.EditActorViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<div>
+    @using (Html.BeginForm("Edit", "Actors", FormMethod.Post, new { @class="form-group"}))
+    {
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FirstName)
+
+        @Html.LabelFor(m => m.MiddleName)
+        @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.MiddleName)
+
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.LastName)
+
+        @Html.LabelFor(m => m.Bio)
+        @Html.TextAreaFor(m => m.Bio, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Bio)
+
+        @Html.LabelFor(m => m.BirthDate)
+        @Html.TextBoxFor(m => m.BirthDate, new { @class = "form-control datefield", @type="date"})
+        @Html.ValidationMessageFor(m => m.BirthDate)
+    </div>
+    <div class="col-md-6"></div>
+    <input type="submit" value="Сохранить"/>
+    }
+</div>

@@ -36,22 +36,22 @@ namespace MovieCom.Web.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        [Authorize(Roles = Roles.Admin)]
-        public ActionResult Edit()
-        {
-            var model = new AddMovieViewModel();
-            model.Genres = _genreService.GetAll();
-            model.Actors = _actorService.GetAll();
-            return View(model);
-        }
+        
 
         [HttpGet]
         [Authorize(Roles = Roles.Admin)]
-        public ActionResult Edit(Guid id)
+        public ActionResult Edit(Guid? id)
         {
-            var movie = _movieService.GetById(id);
-            var model = _mapper.Map<AddMovieViewModel>(movie);
+            AddMovieViewModel model;
+            if (id == null)
+            {
+                model = new AddMovieViewModel();
+            }
+            else
+            {
+                var movie = _movieService.GetById(id.GetValueOrDefault());
+                model = _mapper.Map<AddMovieViewModel>(movie);
+            }
             model.Genres = _genreService.GetAll();
             model.Actors = _actorService.GetAll();
             return View(model);
@@ -67,7 +67,7 @@ namespace MovieCom.Web.Controllers
             if (model.SelectedActors != null)
                 movie.Actors = _actorService.GetByIds(model.SelectedActors);
             _movieService.AddOrUpdate(movie, model.SelectedGenres, model.SelectedActors);
-            return RedirectToAction("Add", "Movie");
+            return RedirectToAction("Index", "Movie");
         }
     }
 }

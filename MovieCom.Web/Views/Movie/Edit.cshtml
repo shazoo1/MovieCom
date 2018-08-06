@@ -1,10 +1,10 @@
 ﻿@model MovieCom.Web.Models.Movie.AddMovieViewModel
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Edit";
 }
 <h2>Добавить фильм</h2>
 <div>
-    @using (Html.BeginForm("Add", "Movie", FormMethod.Post, new { @class = "form-group" }))
+    @using (Html.BeginForm("Edit", "Movie", FormMethod.Post, new { @class = "form-group" }))
     {
     <div class="col-md-6 col-lg-6 col-sm-6">
         @Html.LabelFor(m => m.Title)

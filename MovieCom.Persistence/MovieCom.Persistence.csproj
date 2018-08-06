@@ -94,13 +94,13 @@
     <Compile Include="Migrations\201808020941323_DateTimeFix.Designer.cs">
       <DependentUpon>201808020941323_DateTimeFix.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808021050143_LastModifiedRemoved.cs" />
-    <Compile Include="Migrations\201808021050143_LastModifiedRemoved.Designer.cs">
-      <DependentUpon>201808021050143_LastModifiedRemoved.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201808021106046_LastModifiedAdded.cs" />
     <Compile Include="Migrations\201808021106046_LastModifiedAdded.Designer.cs">
       <DependentUpon>201808021106046_LastModifiedAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808061102140_ActrorPortrait.cs" />
+    <Compile Include="Migrations\201808061102140_ActrorPortrait.Designer.cs">
+      <DependentUpon>201808061102140_ActrorPortrait.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MovieComDbContext.cs" />
@@ -134,11 +134,11 @@
     <EmbeddedResource Include="Migrations\201808020941323_DateTimeFix.resx">
       <DependentUpon>201808020941323_DateTimeFix.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808021050143_LastModifiedRemoved.resx">
-      <DependentUpon>201808021050143_LastModifiedRemoved.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808021106046_LastModifiedAdded.resx">
       <DependentUpon>201808021106046_LastModifiedAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808061102140_ActrorPortrait.resx">
+      <DependentUpon>201808061102140_ActrorPortrait.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

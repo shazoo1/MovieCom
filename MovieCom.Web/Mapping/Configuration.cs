@@ -17,6 +17,7 @@ namespace MovieCom.Web.Mapping
                 cfg.AddProfile(new EntityToModel());
                 cfg.AddProfile(new ModelToEntity());
                 cfg.AddProfile(new ViewModelToModel());
+                cfg.AddProfile(new ModelToViewModel());
             });
         }
 
