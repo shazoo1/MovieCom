@@ -1,0 +1,25 @@
+﻿@model MovieCom.Web.Models.Movie.MoviesListViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Список фильмов</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>IMDB</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                @Html.ActionLink(movie.Title, "Edit", "Movie", new { id = movie.Id}, null)
+                <td>@Html.DisplayFor(modelItem => movie.Title)</td>
+                <td>@Html.DisplayFor(modelItem => movie.Imdb)</td>
+            </tr>
+        }
+    </tbody>
+</table>
