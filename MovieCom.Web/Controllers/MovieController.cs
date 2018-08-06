@@ -35,9 +35,7 @@ namespace MovieCom.Web.Controllers
             model.Movies = _movieService.GetAll();
             return View(model);
         }
-
         
-
         [HttpGet]
         [Authorize(Roles = Roles.Admin)]
         public ActionResult Edit(Guid? id)
@@ -62,11 +60,20 @@ namespace MovieCom.Web.Controllers
         public ActionResult Edit(AddMovieViewModel model)
         {
             var movie = _mapper.Map<MovieModel>(model);
+            movie.Poster = new MediaModel { Link = model.PosterLink, Type = MediaType.Poster };
             if (model.SelectedGenres != null)
                 movie.Genres = _genreService.GetByIds(model.SelectedGenres);
             if (model.SelectedActors != null)
                 movie.Actors = _actorService.GetByIds(model.SelectedActors);
             _movieService.AddOrUpdate(movie, model.SelectedGenres, model.SelectedActors);
+            return RedirectToAction("Index", "Movie");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = Roles.Admin)]
+        public ActionResult Delete(Guid id)
+        {
+            _movieService.Delete(id);
             return RedirectToAction("Index", "Movie");
         }
     }

@@ -14,5 +14,6 @@ namespace MovieCom.Service.Interfaces
         void AddOrUpdate(MovieModel movie, IEnumerable<Guid> genres, IEnumerable<Guid> actors);
         MovieModel GetById(Guid id);
         IEnumerable<MovieModel> GetAll();
+        void Delete(Guid id);
     }
 }

@@ -10,7 +10,7 @@ namespace MovieCom.Web.Models.Movie
 {
     public class AddMovieViewModel
     {
-        
+        public Guid Id { get; set; }   
         [Display(Name ="Название")]
         [Required(ErrorMessage = "Введите название фильма.")]
         public string Title { get; set; }
@@ -23,8 +23,10 @@ namespace MovieCom.Web.Models.Movie
         [Required(ErrorMessage = "Введите год выпуска фильма.")]
         public int Year { get; set; }
         [Display(Name = "Рейтинг IMDB")]
+        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         public decimal Imdb { get; set; }
         [Display(Name = "Ретинг пользователей MovieCom")]
+        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         public decimal Rating { get; set; }
         [Display(Name = "Ссылка на постер")]
         public string PosterLink { get; set; }

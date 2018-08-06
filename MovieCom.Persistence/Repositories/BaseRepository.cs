@@ -36,10 +36,11 @@ namespace MovieCom.Persistence.Repositories
             lock (_locker)
             {
                 _dbSet.AddRange(items);
+                _context.SaveChanges();
             }
         }
 
-        public IQueryable GetAll()
+        public IEnumerable<T> GetAll()
         {
             lock (_locker)
             {
@@ -47,17 +48,17 @@ namespace MovieCom.Persistence.Repositories
             }
         }
 
-        public IQueryable GetAllWhere(params Expression<Func<T, bool>>[] predicates)
+        public IEnumerable<T> GetAllWhere(params Expression<Func<T, bool>>[] predicates)
         {
-            IQueryable query = GetAll();
+            IEnumerable<T> items = GetAll();
             lock (_locker)
             {
                 foreach (var predicate in predicates)
                 {
-                    query = _dbSet.Where(predicate);
+                    items = _dbSet.Where(predicate);
                 }
             }
-            return query;
+            return items;
         }
 
         public T GetById(Guid id)
@@ -73,6 +74,7 @@ namespace MovieCom.Persistence.Repositories
             lock (_locker)
             {
                 _dbSet.Remove(item);
+                _context.SaveChanges();
             }
         }
 
@@ -82,6 +84,7 @@ namespace MovieCom.Persistence.Repositories
             {
                 var item = GetById(id);
                 if (item != null) _dbSet.Remove(item);
+                _context.SaveChanges();
             }
         }
 
@@ -95,6 +98,7 @@ namespace MovieCom.Persistence.Repositories
                     _dbSet.Attach(item);
                 }
                 dbEntityEntry.State = EntityState.Modified;
+                _context.SaveChanges();
             }
         }
     }

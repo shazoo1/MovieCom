@@ -23,23 +23,16 @@ namespace MovieCom.Service.Services
         {
             var movieRepo = _uow.Get<Movie>();
             var movieEntity = _mapper.Map<Movie>(movie);
-            movieEntity.CreatedAt = DateTime.Now;
             if (genres != null)
-                movieEntity.Genres = ((IEnumerable<Genre>)_uow.Get<Genre>().GetAllWhere(x => genres.Contains(x.Id))).ToList();
+                movieEntity.Genres = _uow.Get<Genre>().GetAllWhere(x => genres.Contains(x.Id)).ToList();
             if (actors != null)
-                movieEntity.Actors = ((IEnumerable<Actor>)_uow.Get<Actor>().GetAllWhere(x => genres.Contains(x.Id))).ToList();
-            var dbMovie = movieRepo.GetById(movie.Id);
-            if (dbMovie != null)
+                movieEntity.Actors = _uow.Get<Actor>().GetAllWhere(x => genres.Contains(x.Id)).ToList();
+            if (movie.Id == Guid.Empty)
             {
-                movieEntity.LastModifiedAt = DateTime.Now;
-                movieRepo.Update(movieEntity);
-            }
-            else
-            {
-                movieEntity.Id = Guid.NewGuid();
                 movieEntity.CreatedAt = DateTime.Now;
-                _uow.Get<Movie>().Add(movieEntity);
             }
+            movieEntity.LastModifiedAt = DateTime.Now;
+            movieRepo.Update(movieEntity);
         }
 
         public MovieModel GetById(Guid id)
@@ -50,8 +43,13 @@ namespace MovieCom.Service.Services
 
         public IEnumerable<MovieModel> GetAll()
         {
-            var movies = ((IEnumerable<Movie>)_uow.Get<Movie>().GetAll()).ToList();
+            var movies = _uow.Get<Movie>().GetAll().ToList();
             return _mapper.Map<IEnumerable<MovieModel>>(movies);
+        }
+
+        public void Delete(Guid id)
+        {
+            _uow.Get<Movie>().Remove(id);
         }
     }
 }

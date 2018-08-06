@@ -2,7 +2,15 @@
 @{
     ViewBag.Title = "Edit";
 }
+@if (Model.Title != null)
+{
+    <h2>Редактировать фильм</h2>
+    <a href="@Url.Action("Delete", "Movie", new { id = Model.Id })">Удалить</a>
+}
+else
+{
 <h2>Добавить фильм</h2>
+}
 <div>
     @using (Html.BeginForm("Edit", "Movie", FormMethod.Post, new { @class = "form-group" }))
     {
@@ -20,11 +28,11 @@
         @Html.ValidationMessageFor(m => m.Description)
 
         @Html.LabelFor(m => m.Imdb)
-        @Html.TextBoxFor(m => m.Imdb, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Imdb, new { @class = "form-control", @type="number"})
         @Html.ValidationMessageFor(m => m.Imdb)
 
         @Html.LabelFor(m => m.Year)
-        @Html.TextBoxFor(m => m.Year, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Year, new { @class = "form-control", @type="number" })
         @Html.ValidationMessageFor(m => m.Year)
 
         @Html.LabelFor(m => m.Genres)<br />
