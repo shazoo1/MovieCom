@@ -27,6 +27,7 @@ namespace MovieCom.Persistence.Repositories
             lock (_locker)
             {
                 _dbSet.Add(item);
+                _context.SaveChanges();
             }
         }
 

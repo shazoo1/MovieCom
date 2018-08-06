@@ -10,7 +10,6 @@ namespace MovieCom.Domain.Models.Entities
     public class Comment : BaseEntity
     {
         public string Text { get; set; }
-        public DateTime CreatedAt { get; set; }
         public DateTime LastModifiedAt { get; set; }
         public virtual Movie Movie { get; set; }
         public virtual User User { get; set; }

@@ -13,6 +13,7 @@ namespace MovieCom.Service.Models
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+        public string Fullname { get; set; }
         public string Bio { get; set; }
         public DateTime BirthDate { get; set; }
         public ICollection<MovieModel> Movies { get; set; }

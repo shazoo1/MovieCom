@@ -7,6 +7,7 @@ using AutoMapper;
 using MovieCom.Domain.Contracts;
 using MovieCom.Domain.Models.Entities;
 using MovieCom.Service.Interfaces.Base;
+using MovieCom.Service.Models.Base;
 
 namespace MovieCom.Service.Services.Base
 {
@@ -19,35 +20,6 @@ namespace MovieCom.Service.Services.Base
         {
             _uow = uow;
             _mapper = mapper;
-        }
-        public void AddItem(T item)
-        {
-            _uow.Get<T>().Add(item);
-        }
-
-        public void AddItems(IEnumerable<T> items)
-        {
-            _uow.Get<T>().Add(items);
-        }
-
-        public IEnumerable<T> GetAll()
-        {
-            return ((IEnumerable<T>)_uow.Get<T>().GetAll());
-        }
-
-        public T GetItem(Guid id)
-        {
-            return _uow.Get<T>().GetById(id);
-        }
-
-        public void RemoveItem(Guid id)
-        {
-            _uow.Get<T>().Remove(id);
-        }
-
-        public void RemoveItem(T item)
-        {
-            _uow.Get<T>().Remove(item);
         }
     }
 }

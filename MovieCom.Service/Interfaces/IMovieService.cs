@@ -11,6 +11,8 @@ namespace MovieCom.Service.Interfaces
 {
     public interface IMovieService : IBaseService<Movie>
     {
-
+        void AddOrUpdate(MovieModel movie, IEnumerable<Guid> genres, IEnumerable<Guid> actors);
+        MovieModel GetById(Guid id);
+        IEnumerable<MovieModel> GetAll();
     }
 }

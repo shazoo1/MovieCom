@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MovieCom.Domain.Contracts;
 using MovieCom.Domain.Contracts.Repositories.Interfaces;
 using MovieCom.Domain.Models.Entities;
+using MovieCom.Persistence.Repositories;
 
 namespace MovieCom.Persistence
 {
@@ -21,11 +22,13 @@ namespace MovieCom.Persistence
 
         public IBaseRepository<T> Get<T>() where T : BaseEntity
         {
-            if (!_repositories.ContainsKey(typeof(T)))
-            {
-                _repositories.Add(typeof(T), (IBaseRepository<T>)Activator.CreateInstance(typeof(T), _context));
-            }
-            return (IBaseRepository<T>)_repositories[typeof(T)];
+            if (_repositories.ContainsKey(typeof(T)))
+                return _repositories[typeof(T)] as IBaseRepository<T>;
+            var repositoryType = typeof(BaseRepository<>).MakeGenericType(typeof(T));
+            var repository = (IBaseRepository<T>)Activator.CreateInstance(repositoryType, this._context);
+            _repositories.Add(typeof(T), repository);
+
+            return repository;
         }
 
         public int SaveChanges()

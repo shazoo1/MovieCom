@@ -6,6 +6,7 @@ using MovieCom.Domain.Models.Entities;
 using MovieCom.Persistence.Mapping;
 using Persistence.Mapping;
 using MovieCom.Domain.Contracts;
+using MovieCom.Persistence.Migrations;
 
 namespace MovieCom.Persistence
 {

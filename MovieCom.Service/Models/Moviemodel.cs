@@ -17,10 +17,10 @@ namespace MovieCom.Service.Models
         public decimal Imdb { get; set; }
         public decimal Rating { get; set; }
         public MediaModel Poster { get; set; }
-        public ICollection<ActorModel> Actors { get; set; }
-        public ICollection<MediaModel> Media { get; set; }
-        public ICollection<GenreModel> Genres { get; set; }
-        public ICollection<CommentModel> Comments { get; set; }
-        public ICollection<GradeModel> Grades { get; set; }
+        public IEnumerable<ActorModel> Actors { get; set; }
+        public IEnumerable<MediaModel> Media { get; set; }
+        public IEnumerable<GenreModel> Genres { get; set; }
+        public IEnumerable<CommentModel> Comments { get; set; }
+        public IEnumerable<GradeModel> Grades { get; set; }
     }
 }
