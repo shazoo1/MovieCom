@@ -10,29 +10,25 @@ using MovieCom.Service.Models;
 using MovieCom.Service.Services;
 using MovieCom.Web.Controllers.Base;
 using MovieCom.Web.Models.Movie;
+using MovieCom.Web.Helpers.Interfaces;
 
 namespace MovieCom.Web.Controllers
 {
     public class MovieController : BaseController
     {
         
-        IGenreService _genreService;
-        IActorService _actorService;
-        IMovieService _movieService;
 
-        public MovieController(IGenreService genreService, IActorService actorService,
-            IMovieService movieService, IMapper mapper) : base(mapper)
+        public MovieController(IServiceHost serviceHost, IMapper mapper) : base(mapper, serviceHost)
         {
-            _genreService = genreService;
-            _actorService = actorService;
-            _movieService = movieService;
         }
 
         // GET: Movie
         public ActionResult Index()
         {
             var model = new MoviesListViewModel();
-            model.Movies = _movieService.GetAll();
+            var movieService = _serviceHost.GetService<MovieService>();
+
+            model.Movies = movieService.GetAll();
             return View(model);
         }
         
@@ -41,17 +37,21 @@ namespace MovieCom.Web.Controllers
         public ActionResult Edit(Guid? id)
         {
             AddMovieViewModel model;
+            var movieService = _serviceHost.GetService<MovieService>();
+            var genreService = _serviceHost.GetService<GenreService>();
+            var actorService = _serviceHost.GetService<ActorService>();
+
             if (id == null)
             {
                 model = new AddMovieViewModel();
             }
             else
             {
-                var movie = _movieService.GetById(id.GetValueOrDefault());
+                var movie = movieService.GetById(id.GetValueOrDefault());
                 model = _mapper.Map<AddMovieViewModel>(movie);
             }
-            model.Genres = _genreService.GetAll();
-            model.Actors = _actorService.GetAll();
+            model.Genres = genreService.GetAll();
+            model.Actors = actorService.GetAll();
             return View(model);
         }
 
@@ -60,12 +60,16 @@ namespace MovieCom.Web.Controllers
         public ActionResult Edit(AddMovieViewModel model)
         {
             var movie = _mapper.Map<MovieModel>(model);
+            var movieService = _serviceHost.GetService<MovieService>();
+            var genreService = _serviceHost.GetService<GenreService>();
+            var actorService = _serviceHost.GetService<ActorService>();
+
             movie.Poster = new MediaModel { Link = model.PosterLink, Type = MediaType.Poster };
             if (model.SelectedGenres != null)
-                movie.Genres = _genreService.GetByIds(model.SelectedGenres);
+                movie.Genres = genreService.GetByIds(model.SelectedGenres);
             if (model.SelectedActors != null)
-                movie.Actors = _actorService.GetByIds(model.SelectedActors);
-            _movieService.AddOrUpdate(movie, model.SelectedGenres, model.SelectedActors);
+                movie.Actors = actorService.GetByIds(model.SelectedActors);
+            movieService.AddOrUpdate(movie, model.SelectedGenres, model.SelectedActors);
             return RedirectToAction("Index", "Movie");
         }
 
@@ -73,7 +77,9 @@ namespace MovieCom.Web.Controllers
         [Authorize(Roles = Roles.Admin)]
         public ActionResult Delete(Guid id)
         {
-            _movieService.Delete(id);
+            var movieService = _serviceHost.GetService<MovieService>();
+
+            movieService.Delete(id);
             return RedirectToAction("Index", "Movie");
         }
     }

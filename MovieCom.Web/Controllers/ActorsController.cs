@@ -12,21 +12,24 @@ using System.Web.Mvc;
 using MovieCom.Common.Enums;
 using System.Collections;
 using MovieCom.Service.Models;
+using MovieCom.Web.Helpers.Interfaces;
+using MovieCom.Service.Services;
 
 namespace MovieCom.Web.Controllers
 {
     public class ActorsController : BaseController
     {
-        IActorService _actorService;
-        public ActorsController(IMapper mapper, IActorService actorSevice) : base(mapper)
+        
+        public ActorsController(IMapper mapper, IServiceHost serviceHost) : base(mapper, serviceHost)
         {
-            _actorService = actorSevice;
         }
         // GET: Actors
         public ActionResult Index()
         {
+            var actorService = _serviceHost.GetService<ActorService>();
             var model = new ActorsListViewModel();
-            model.ActorsList = _actorService.GetAll();
+
+            model.ActorsList = actorService.GetAll();
             return View(model);
         }
 
@@ -34,13 +37,15 @@ namespace MovieCom.Web.Controllers
         public ActionResult Edit(Guid? id)
         {
             EditActorViewModel model;
+            var actorService = _serviceHost.GetService<ActorService>();
+
             if (id == null)
             {
                 model = new EditActorViewModel();
             }
             else
             {
-                var actor = _actorService.GetById(id.Value);
+                var actor = actorService.GetById(id.Value);
                 model = _mapper.Map<EditActorViewModel>(actor);
             }
             return View(model);   
@@ -51,14 +56,18 @@ namespace MovieCom.Web.Controllers
         public ActionResult Edit(EditActorViewModel model)
         {
             var actorModel = _mapper.Map<ActorModel>(model);
-            _actorService.InsertOrUpdate(actorModel);
+            var actorService = _serviceHost.GetService<ActorService>();
+
+            actorService.InsertOrUpdate(actorModel);
             return RedirectToAction("Index", "Actors");
         }
         
         [Authorize(Roles = Roles.Admin)]
         public ActionResult Delete(Guid id)
         {
-            _actorService.Delete(id);
+            var actorService = _serviceHost.GetService<ActorService>();
+
+            actorService.Delete(id);
             return RedirectToAction("Index", "Actors");
         }
     }

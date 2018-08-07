@@ -7,6 +7,9 @@ using MovieCom.Service.Services;
 using MovieCom.Web.Mapping;
 using Unity;
 using Unity.AspNet.Mvc;
+using MovieCom.Web.Helpers.Interfaces;
+using MovieCom.Web.Helpers;
+using Unity.Injection;
 
 namespace MovieCom.Web
 {
@@ -50,6 +53,7 @@ namespace MovieCom.Web
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IUnitOfWork, UnitOfWork>(new PerRequestLifetimeManager());
             container.RegisterType<IMovieComDbContext, MovieComDbContext>();
+            container.RegisterType<IServiceHost, ServiceHost>(new InjectionConstructor(container));
 
             //TODO :: Register services
             container.RegisterType<IMovieService, MovieService>();

@@ -76,6 +76,7 @@
     <Compile Include="Identity\SignInManager.cs" />
     <Compile Include="Identity\UserManager.cs" />
     <Compile Include="Interfaces\Base\IBaseService.cs" />
+    <Compile Include="Interfaces\Base\IService.cs" />
     <Compile Include="Interfaces\IActorService.cs" />
     <Compile Include="Interfaces\IGenreService.cs" />
     <Compile Include="Interfaces\IMovieService.cs" />

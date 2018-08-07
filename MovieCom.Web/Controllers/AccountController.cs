@@ -13,13 +13,14 @@ using MovieCom.Domain.Entities.Identity;
 using MovieCom.Service.Identity;
 using MovieCom.Web.Controllers.Base;
 using MovieCom.Web.Models;
+using MovieCom.Web.Helpers.Interfaces;
 
 namespace MovieCom.Web.Controllers
 {
     [Authorize]
     public class AccountController : BaseController
     {
-        public AccountController(IMapper mapper) : base(mapper)
+        public AccountController(IMapper mapper, IServiceHost serviceHost) : base(mapper, serviceHost)
         {
         }
      

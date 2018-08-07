@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MovieCom.Service.Identity;
+using MovieCom.Web.Helpers.Interfaces;
 
 namespace MovieCom.Web.Controllers.Base
 {
@@ -19,9 +20,12 @@ namespace MovieCom.Web.Controllers.Base
         protected SignInManager SignInManager => Request.GetOwinContext().GetUserManager<SignInManager>();
         protected IAuthenticationManager AuthenticationManager => Request.GetOwinContext().Authentication;
 
-        public BaseController(IMapper mapper)
+        protected IServiceHost _serviceHost;
+
+        public BaseController(IMapper mapper, IServiceHost serviceHost)
         {
             _mapper = mapper;
+            _serviceHost = serviceHost;
         }
     }
 }
