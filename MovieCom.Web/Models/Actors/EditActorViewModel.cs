@@ -25,7 +25,8 @@ namespace MovieCom.Web.Models.Actors
         public string Bio { get; set; }
         [Display(Name = "Дата рождения")]
         [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public string BirthDate { get; set; }
         [Display(Name = "Фото")]
         public string PortraitLink { get; set; }
     }

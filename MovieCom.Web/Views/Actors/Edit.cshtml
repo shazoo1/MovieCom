@@ -40,4 +40,14 @@
     <input type="submit" value="Сохранить"/>
     }
 </div>
-<script>$(".chzn-select").chosen();</script>
+<script type="text/javascript">
+    $(function () {
+        if (!Modernizr.inputtypes.date) {
+            $(function () {
+                $("input[type='date']")
+                    .datepicker({ dateFormat: 'dd/mm/yy' })
+                    .get(0).setAttribute("type", "text");
+            })
+        }
+    });
+</script>

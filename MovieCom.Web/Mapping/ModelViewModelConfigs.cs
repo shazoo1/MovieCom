@@ -14,7 +14,10 @@ namespace MoviewCom.Web.Mapping
         public ModelToViewModel()
         {
             CreateMap<MovieModel, AddMovieViewModel>();
-            CreateMap<ActorModel, EditActorViewModel>();
+            CreateMap<ActorModel, EditActorViewModel>()
+                .ForMember(d => d.BirthDate, opt => opt.ResolveUsing((s, d, i, context) => {
+                    return s.BirthDate.ToString("yyyy-MM-dd");
+                }));
         }
     }
 
@@ -23,7 +26,10 @@ namespace MoviewCom.Web.Mapping
         public ViewModelToModel()
         {
             CreateMap<AddMovieViewModel, MovieModel>();
-            CreateMap<EditActorViewModel, ActorModel>();
+            CreateMap<EditActorViewModel, ActorModel>()
+                .ForMember(d => d.BirthDate, opt => opt.ResolveUsing((s, d, i, context) => {
+                    return DateTime.Parse(s.BirthDate);
+                })); ;
         }
     }
 }

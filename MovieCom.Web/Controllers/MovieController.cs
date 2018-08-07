@@ -41,7 +41,7 @@ namespace MovieCom.Web.Controllers
             var genreService = _serviceHost.GetService<GenreService>();
             var actorService = _serviceHost.GetService<ActorService>();
 
-            if (id == null)
+            if (id == null || id != Guid.Empty)
             {
                 model = new AddMovieViewModel();
             }
