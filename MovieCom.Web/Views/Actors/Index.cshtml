@@ -1,0 +1,24 @@
+﻿@model MovieCom.Web.Models.Actors.ActorsListViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Актёры</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Полное имя</th>
+            <th scope="col">Дата рождения</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.ActorsList)
+        {
+            <tr onclick="location.href='@Url.Action("Edit", "Actors", new { id = item.Id})'">
+                <td scope="row">@(String.Format("{0} {1} {2}", item.FirstName, item.MiddleName, item.LastName))</td>
+                <td scope="row">@item.BirthDate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

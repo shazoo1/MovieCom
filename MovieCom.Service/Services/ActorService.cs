@@ -34,5 +34,26 @@ namespace MovieCom.Service.Services
             var actor = _uow.Get<Actor>().GetById(id);
             return _mapper.Map<ActorModel>(actor);
         }
+
+        public void InsertOrUpdate(ActorModel actor)
+        {
+            var actorEntity = _mapper.Map<Actor>(actor);
+            if (actorEntity.Id == Guid.Empty)
+            {
+                actorEntity.Id = Guid.NewGuid();
+                actorEntity.CreatedAt = DateTime.Now;
+                _uow.Get<Actor>().Add(actorEntity);
+            }
+            else
+            {
+                actorEntity.LastModifiedAt = DateTime.Now;
+            _uow.Get<Actor>().Update(actorEntity);
+            }
+        }
+
+        public void Delete(Guid id)
+        {
+            _uow.Get<Actor>().Remove(id);
+        }
     }
 }

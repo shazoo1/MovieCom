@@ -9,6 +9,7 @@ namespace MovieCom.Web.Models.Actors
 {
     public class EditActorViewModel
     {
+        public Guid Id { get; set; }
         [Required]
         [Display(Name = "Имя")]
         public string FirstName { get; set; }
@@ -17,6 +18,9 @@ namespace MovieCom.Web.Models.Actors
         [Required]
         [Display(Name = "Фамилия")]
         public string LastName { get; set; }
+        [Required]
+        [Display(Name="Отображаемое имя")]
+        public string DisplayName { get; set; }
         [Display(Name = "Биография")]
         public string Bio { get; set; }
         [Display(Name = "Дата рождения")]

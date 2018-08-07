@@ -28,7 +28,7 @@ else
         @Html.ValidationMessageFor(m => m.Description)
 
         @Html.LabelFor(m => m.Imdb)
-        @Html.TextBoxFor(m => m.Imdb, new { @class = "form-control", @type="number"})
+        @Html.TextBoxFor(m => m.Imdb, new { @class = "form-control"})
         @Html.ValidationMessageFor(m => m.Imdb)
 
         @Html.LabelFor(m => m.Year)
@@ -41,9 +41,8 @@ else
         @Html.ValidationMessageFor(m => m.Genres)
 
         @Html.LabelFor(m => m.Actors)<br />
-        @Html.ListBoxFor(m => m.SelectedActors, new MultiSelectList(Model.Actors, "Id", "FullName", Model.SelectedActors),
+        @Html.ListBoxFor(m => m.SelectedActors, new MultiSelectList(Model.Actors, "Id", "DisplayName", Model.SelectedActors),
             new { @class= "chzn-select form-control", data_placeholder="Актёры"})<br />
-        @Html.ValidationMessageFor(m => m.Actors)
         <br />
         <input type="submit" value="Добавить" />
     </div>

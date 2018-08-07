@@ -13,7 +13,8 @@ namespace MovieCom.Service.Interfaces
     {
         IEnumerable<ActorModel> GetAll();
         IEnumerable<ActorModel> GetByIds(IEnumerable<Guid> guids);
-
+        void InsertOrUpdate(ActorModel actor);
         ActorModel GetById(Guid id);
+        void Delete(Guid id);
     }
 }

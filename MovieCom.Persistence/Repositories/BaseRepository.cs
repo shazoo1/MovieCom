@@ -44,21 +44,21 @@ namespace MovieCom.Persistence.Repositories
         {
             lock (_locker)
             {
-                return _dbSet;
+                return _dbSet.ToList();
             }
         }
 
         public IEnumerable<T> GetAllWhere(params Expression<Func<T, bool>>[] predicates)
         {
-            IEnumerable<T> items = GetAll();
             lock (_locker)
             {
+            IEnumerable<T> items = GetAll();
                 foreach (var predicate in predicates)
                 {
                     items = _dbSet.Where(predicate);
                 }
-            }
             return items;
+            }
         }
 
         public T GetById(Guid id)

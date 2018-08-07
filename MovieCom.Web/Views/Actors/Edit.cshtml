@@ -4,7 +4,7 @@
 }
 
 <h2>Edit</h2>
-
+<a href="@Url.Action("Delete", "Actors", new { id = Model.Id})">Удалить</a>
 <div>
     @using (Html.BeginForm("Edit", "Actors", FormMethod.Post, new { @class="form-group"}))
     {
@@ -21,6 +21,10 @@
         @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.LastName)
 
+        @Html.LabelFor(m => m.DisplayName)
+        @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.DisplayName)
+
         @Html.LabelFor(m => m.Bio)
         @Html.TextAreaFor(m => m.Bio, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Bio)
@@ -28,8 +32,12 @@
         @Html.LabelFor(m => m.BirthDate)
         @Html.TextBoxFor(m => m.BirthDate, new { @class = "form-control datefield", @type="date"})
         @Html.ValidationMessageFor(m => m.BirthDate)
+
     </div>
-    <div class="col-md-6"></div>
+    <div class="col-md-6">
+        
+    </div>
     <input type="submit" value="Сохранить"/>
     }
 </div>
+<script>$(".chzn-select").chosen();</script>
