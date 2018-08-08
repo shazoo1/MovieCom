@@ -14,7 +14,6 @@ namespace MovieCom.Persistence.Mapping
         {
             ToTable("Media");
             HasKey(x => x.Id);
-            HasRequired(x => x.Movie);
 
             Property(x => x.Link)
                 .IsRequired();

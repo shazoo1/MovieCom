@@ -15,8 +15,6 @@ namespace MovieCom.Persistence.Mapping
             ToTable("Movies");
             HasKey(x => x.Id);
             
-            HasOptional(x => x.Poster)
-                .WithRequired(y => y.Movie);
             HasMany(x => x.Actors)
                 .WithMany(y => y.Movies);
             HasMany(x => x.Media);
