@@ -36,22 +36,22 @@ namespace MovieCom.Web.Controllers
         [Authorize(Roles = Roles.Admin)]
         public ActionResult Edit(Guid? id)
         {
-            AddMovieViewModel model;
+            AddMovieViewModel model = new AddMovieViewModel();
             var movieService = _serviceHost.GetService<MovieService>();
             var genreService = _serviceHost.GetService<GenreService>();
             var actorService = _serviceHost.GetService<ActorService>();
 
-            if (id == null || id != Guid.Empty)
+            if (id != null && id != Guid.Empty)
             {
-                model = new AddMovieViewModel();
+                var movie = movieService.GetById(id.GetValueOrDefault());
+                model.Movie = _mapper.Map<MovieViewModel>(movie);
             }
             else
             {
-                var movie = movieService.GetById(id.GetValueOrDefault());
-                model = _mapper.Map<AddMovieViewModel>(movie);
+                model.Movie = new MovieViewModel();
             }
-            model.Genres = genreService.GetAll();
-            model.Actors = actorService.GetAll();
+            model.AllGenres = genreService.GetAll();
+            model.AllActors = actorService.GetAll();
             return View(model);
         }
 
@@ -59,17 +59,14 @@ namespace MovieCom.Web.Controllers
         [Authorize(Roles = Roles.Admin)]
         public ActionResult Edit(AddMovieViewModel model)
         {
-            var movie = _mapper.Map<MovieModel>(model);
+            var movie = _mapper.Map<MovieModel>(model.Movie);
             var movieService = _serviceHost.GetService<MovieService>();
             var genreService = _serviceHost.GetService<GenreService>();
             var actorService = _serviceHost.GetService<ActorService>();
 
-            movie.Poster = new MediaModel { Link = model.PosterLink, Type = MediaType.Poster };
-            if (model.SelectedGenres != null)
-                movie.Genres = genreService.GetByIds(model.SelectedGenres);
-            if (model.SelectedActors != null)
-                movie.Actors = actorService.GetByIds(model.SelectedActors);
-            movieService.AddOrUpdate(movie, model.SelectedGenres, model.SelectedActors);
+            movie.Poster = new MediaModel { Link = model.Movie.PosterLink, Type = MediaType.Poster };
+            
+            movieService.AddOrUpdate(movie);
             return RedirectToAction("Index", "Movie");
         }
 

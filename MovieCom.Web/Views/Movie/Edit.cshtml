@@ -2,10 +2,10 @@
 @{
     ViewBag.Title = "Edit";
 }
-@if (Model.Title != null)
+@if (Model.Movie != null)
 {
     <h2>Редактировать фильм</h2>
-    <a href="@Url.Action("Delete", "Movie", new { id = Model.Id })">Удалить</a>
+    <a href="@Url.Action("Delete", "Movie", new { id = Model.Movie.Id })">Удалить</a>
 }
 else
 {
@@ -15,41 +15,43 @@ else
     @using (Html.BeginForm("Edit", "Movie", FormMethod.Post, new { @class = "form-group" }))
     {
     <div class="col-md-6 col-lg-6 col-sm-6">
-        @Html.LabelFor(m => m.Title)
-        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Title)
+        @Html.HiddenFor(m => m.Movie.Id)
 
-        @Html.LabelFor(m => m.Slogan)
-        @Html.TextBoxFor(m => m.Slogan, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Slogan)
+        @Html.LabelFor(m => m.Movie.Title)
+        @Html.TextBoxFor(m => m.Movie.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.Title)
 
-        @Html.LabelFor(m => m.Description)
-        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Description)
+        @Html.LabelFor(m => m.Movie.Slogan)
+        @Html.TextBoxFor(m => m.Movie.Slogan, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.Slogan)
 
-        @Html.LabelFor(m => m.Imdb)
-        @Html.TextBoxFor(m => m.Imdb, new { @class = "form-control"})
-        @Html.ValidationMessageFor(m => m.Imdb)
+        @Html.LabelFor(m => m.Movie.Description)
+        @Html.TextAreaFor(m => m.Movie.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.Description)
 
-        @Html.LabelFor(m => m.Year)
-        @Html.TextBoxFor(m => m.Year, new { @class = "form-control", @type="number" })
-        @Html.ValidationMessageFor(m => m.Year)
+        @Html.LabelFor(m => m.Movie.Imdb)
+        @Html.TextBoxFor(m => m.Movie.Imdb, new { @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Movie.Imdb)
 
-        @Html.LabelFor(m => m.Genres)<br />
-        @Html.ListBoxFor(m => m.SelectedGenres, new MultiSelectList(Model.Genres, "Id", "Name", Model.SelectedGenres),
+        @Html.LabelFor(m => m.Movie.Year)
+        @Html.TextBoxFor(m => m.Movie.Year, new { @class = "form-control", @type="number" })
+        @Html.ValidationMessageFor(m => m.Movie.Year)
+
+        @Html.LabelFor(m => m.AllGenres)<br />
+        @Html.ListBoxFor(m => m.Movie.Genres, new MultiSelectList(Model.AllGenres, "Id", "Name", Model.Movie.Genres),
             new { @class= "chzn-select form-control", data_placeholder="Жанр"})<br />
-        @Html.ValidationMessageFor(m => m.Genres)
+        @Html.ValidationMessageFor(m => m.AllGenres)
 
-        @Html.LabelFor(m => m.Actors)<br />
-        @Html.ListBoxFor(m => m.SelectedActors, new MultiSelectList(Model.Actors, "Id", "DisplayName", Model.SelectedActors),
+        @Html.LabelFor(m => m.AllActors)<br />
+        @Html.ListBoxFor(m => m.Movie.Actors, new MultiSelectList(Model.AllActors, "Id", "DisplayName", Model.Movie.Actors),
             new { @class= "chzn-select form-control", data_placeholder="Актёры"})<br />
         <br />
         <input type="submit" value="Добавить" />
     </div>
         <div class="col-md-6 col-lg-6 col-sm-6">
-            @Html.LabelFor(m => m.PosterLink)
-            @Html.TextBoxFor(m => m.PosterLink, new { @class = "form-control", @id = "imgLink" })
-            @Html.ValidationMessageFor(m => m.PosterLink)
+            @Html.LabelFor(m => m.Movie.PosterLink)
+            @Html.TextBoxFor(m => m.Movie.PosterLink, new { @class = "form-control", @id = "imgLink" })
+            @Html.ValidationMessageFor(m => m.Movie.PosterLink)
 
             <img id="posterPreview" src="..." class="img-fluid" alt="Постер" onerror="this.src = 'https://www.fing.edu.uy/inco/grupos/gsi/img/placeholder.png'" style="max-width: 400px">
         </div>

@@ -10,32 +10,10 @@ namespace MovieCom.Web.Models.Movie
 {
     public class AddMovieViewModel
     {
-        public Guid Id { get; set; }   
-        [Display(Name ="Название")]
-        [Required(ErrorMessage = "Введите название фильма.")]
-        public string Title { get; set; }
-        [Display(Name = "Слоган")]
-        public string Slogan { get; set; }
-        [Display(Name = "Описание")]
-        [Required(ErrorMessage = "Необходимо описание фильма.")]
-        public string Description { get; set; }
-        [Display(Name = "Год выпуска")]
-        [Required(ErrorMessage = "Введите год выпуска фильма.")]
-        public int Year { get; set; }
-        [Display(Name = "Рейтинг IMDB")]
-        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
-        public decimal Imdb { get; set; }
-        [Display(Name = "Ретинг пользователей MovieCom")]
-        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
-        public decimal Rating { get; set; }
-        [Display(Name = "Ссылка на постер")]
-        public string PosterLink { get; set; }
-        public IEnumerable<Guid> SelectedActors { get; set; }
+        public MovieViewModel Movie { get; set; }
         [Display(Name = "В ролях")]
-        public IEnumerable<ActorModel> Actors { get; set; }
-        public IEnumerable<MediaModel> Media { get; set; }
-        public IEnumerable<Guid> SelectedGenres { get; set; }
+        public IEnumerable<ActorModel> AllActors { get; set; }
         [Display(Name = "Жанр")]
-        public IEnumerable<GenreModel> Genres { get; set; }
+        public IEnumerable<GenreModel> AllGenres { get; set; }
     }
 }
