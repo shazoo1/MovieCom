@@ -26,3 +26,12 @@ textarea {
 .chosen-choices li.search-field input[type="text"]{
     width: 100% !important;
 }
+
+#dropZone {
+    background: gray;
+    border: black dashed 3px;
+    width: 200px;
+    padding: 50px;
+    text-align: center;
+    color: white;
+}

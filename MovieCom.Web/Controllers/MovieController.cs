@@ -11,6 +11,7 @@ using MovieCom.Service.Services;
 using MovieCom.Web.Controllers.Base;
 using MovieCom.Web.Models.Movie;
 using MovieCom.Web.Helpers.Interfaces;
+using System.IO;
 
 namespace MovieCom.Web.Controllers
 {
@@ -78,6 +79,38 @@ namespace MovieCom.Web.Controllers
 
             movieService.Delete(id);
             return RedirectToAction("Index", "Movie");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = Roles.Admin)]
+        public ActionResult UploadPoster()
+        {
+            string path = "";
+            try
+            {
+                foreach (string fileName in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[fileName];
+                    //Save file content goes here
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var originalDirectory = new DirectoryInfo(string.Format("{0}Uploads\\", Server.MapPath(@"\")));
+                        var fileExtension = Path.GetExtension(file.FileName);
+                        var fileName1 = Path.GetRandomFileName();
+                        var pathString = originalDirectory.ToString();
+                        bool exists = System.IO.Directory.Exists(pathString);
+                        if (!exists)
+                            System.IO.Directory.CreateDirectory(pathString);
+                        path = string.Format("{0}{1}", pathString, fileName1 + fileExtension);
+                        file.SaveAs(path);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+            return Json(new { Message = path });
         }
     }
 }
