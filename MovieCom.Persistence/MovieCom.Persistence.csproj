@@ -106,6 +106,10 @@
     <Compile Include="Migrations\201808070436423_ActorDisplayNameAdded.Designer.cs">
       <DependentUpon>201808070436423_ActorDisplayNameAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808081149477_RemoveRequiredFromActorsMiddleName.cs" />
+    <Compile Include="Migrations\201808081149477_RemoveRequiredFromActorsMiddleName.Designer.cs">
+      <DependentUpon>201808081149477_RemoveRequiredFromActorsMiddleName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MovieComDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -146,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808070436423_ActorDisplayNameAdded.resx">
       <DependentUpon>201808070436423_ActorDisplayNameAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808081149477_RemoveRequiredFromActorsMiddleName.resx">
+      <DependentUpon>201808081149477_RemoveRequiredFromActorsMiddleName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

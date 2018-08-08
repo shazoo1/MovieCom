@@ -66,6 +66,7 @@ namespace MoviewCom.Web.Mapping
                 .ForMember(d => d.BirthDate, opt => opt.ResolveUsing((s, d, i, context) => {
                     return DateTime.Parse(s.BirthDate);
                 }));
+            CreateMap<GenreViewModel, GenreModel>();
         }
     }
 }

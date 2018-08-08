@@ -250,6 +250,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Movie\AddMovieViewModel.cs" />
+    <Compile Include="Models\Movie\GenresListViewModel.cs" />
+    <Compile Include="Models\Movie\GenreViewModel.cs" />
     <Compile Include="Models\Movie\MoviesListViewModel.cs" />
     <Compile Include="Models\Movie\MovieViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -427,6 +429,8 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Actors\Index.cshtml" />
+    <Content Include="Views\Movie\Genres.cshtml" />
+    <Content Include="Views\Movie\Partial\EditGenrePartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

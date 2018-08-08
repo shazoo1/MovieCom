@@ -112,5 +112,25 @@ namespace MovieCom.Web.Controllers
             }
             return Json(new { Message = path });
         }
+
+        [HttpGet]
+        [Authorize (Roles = Roles.Admin)]
+        public ActionResult Genres()
+        {
+            var model = new GenresListViewModel();
+            var genresService = _serviceHost.GetService<IGenreService>();
+            model.Genres = genresService.GetAll();
+            model.Genre = new GenreViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles=Roles.Admin)]
+        public ActionResult EditGenre(GenreViewModel genre)
+        {
+            var genreService = _serviceHost.GetService<IGenreService>();
+            genreService.AddOrUpdate(_mapper.Map<GenreModel>(genre));
+            return RedirectToAction("Genres", "Movie");
+        }
     }
 }

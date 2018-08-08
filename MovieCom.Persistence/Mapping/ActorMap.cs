@@ -23,8 +23,7 @@ namespace MovieCom.Persistence.Mapping
                 .HasMaxLength(20)
                 .IsRequired();
             Property(x => x.MiddleName)
-                .HasMaxLength(20)
-                .IsRequired();
+                .HasMaxLength(20);
             Property(x => x.LastName)
                 .HasMaxLength(20)
                 .IsRequired();

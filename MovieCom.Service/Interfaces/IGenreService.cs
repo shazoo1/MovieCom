@@ -13,5 +13,6 @@ namespace MovieCom.Service.Interfaces
     {
         IEnumerable<GenreModel> GetAll();
         IEnumerable<GenreModel> GetByIds(IEnumerable<Guid> guids);
+        void AddOrUpdate(GenreModel genre);
     }
 }

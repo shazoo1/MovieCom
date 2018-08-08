@@ -1,0 +1,12 @@
+﻿@model MovieCom.Web.Models.Movie.GenreViewModel
+
+@using (Html.BeginForm("EditGenre", "Movie", FormMethod.Post, new { @class = "form-group"}))
+{
+    @Html.LabelFor(m => m.Name)<br />
+    @Html.TextBoxFor(m => m.Name, new { @id = "genreName", @class="form-control" }) <br/>
+    @Html.ValidationMessageFor(m => m.Name) <br />
+
+    @Html.HiddenFor(m => m.Id, new{ @id = "genreId"});
+
+    <input type="submit" value="Сохранить" />
+}

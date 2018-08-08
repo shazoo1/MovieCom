@@ -31,5 +31,22 @@ namespace MovieCom.Service.Services
             var genres = ((IEnumerable<Genre>)_uow.Get<Genre>().GetAllWhere(x => guids.Contains(x.Id))).ToList();
             return _mapper.Map<IEnumerable<GenreModel>>(genres);
         }
+
+        public void AddOrUpdate(GenreModel genre)
+        {
+            var genreEntity = _mapper.Map<Genre>(genre);
+            if (genre.Id == Guid.Empty)
+            {
+                genreEntity.Id = Guid.NewGuid();
+                genreEntity.CreatedAt = DateTime.Now;
+                _uow.Get<Genre>().Add(genreEntity);
+            }
+            else
+            {
+                genreEntity.LastModifiedAt = DateTime.Now;
+                _uow.Get<Genre>().Update(genreEntity);
+            }
+
+        }
     }
 }

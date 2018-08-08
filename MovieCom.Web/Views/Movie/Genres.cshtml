@@ -1,0 +1,27 @@
+﻿@model MovieCom.Web.Models.Movie.GenresListViewModel
+@{
+    ViewBag.Title = "AddGenre";
+}
+
+<h2>Жанры</h2>
+<div>
+    <table class="table table-striped">
+        @foreach (var genre in Model.Genres)
+        {
+        <tr onclick="edit(this)">
+            <td scope="row" id="name">@genre.Name</td>
+            <td><input type="hidden" id="id" value="@genre.Id" /></td>
+        </tr>
+        }
+    </table>
+</div>
+<div>
+    @{Html.RenderPartial("~/Views/Movie/Partial/EditGenrePartialView.cshtml", @Model.Genre);}
+</div>
+<script>
+    function edit(row) {
+        $('#genreName').val($(row).find('#name').text());
+        $('#genreId').val($(row).find('#id').val());
+    }
+</script>
+
