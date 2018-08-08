@@ -55,7 +55,7 @@ namespace MovieCom.Persistence.Repositories
             IEnumerable<T> items = GetAll();
                 foreach (var predicate in predicates)
                 {
-                    items = _dbSet.Where(predicate);
+                    items = _dbSet.Where(predicate).ToList();
                 }
             return items;
             }
@@ -99,6 +99,14 @@ namespace MovieCom.Persistence.Repositories
                 }
                 dbEntityEntry.State = EntityState.Modified;
                 _context.SaveChanges();
+            }
+        }
+
+        public IEnumerable<T> GetByIds(IEnumerable<Guid> ids)
+        {
+            lock (_locker)
+            {
+                return _dbSet.Where(x => ids.Contains(x.Id)).ToList();
             }
         }
     }

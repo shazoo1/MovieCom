@@ -19,14 +19,16 @@ namespace MovieCom.Service.Services
 
         }
 
-        public void AddOrUpdate(MovieModel movie, IEnumerable<Guid> genres, IEnumerable<Guid> actors)
+        public void AddOrUpdate(MovieModel movie)
         {
             var movieRepo = _uow.Get<Movie>();
             var movieEntity = _mapper.Map<Movie>(movie);
-            if (genres != null)
-                movieEntity.Genres = _uow.Get<Genre>().GetAllWhere(x => genres.Contains(x.Id)).ToList();
-            if (actors != null)
-                movieEntity.Actors = _uow.Get<Actor>().GetAllWhere(x => genres.Contains(x.Id)).ToList();
+            var actorIds = movie.Actors.Select(x => x.Id);
+            var genreIds = movie.Genres.Select(x => x.Id);
+
+            movieEntity.Actors = (ICollection<Actor>)_uow.Get<Actor>().GetByIds(actorIds);
+            movieEntity.Genres = (ICollection<Genre>)_uow.Get<Genre>().GetByIds(genreIds);
+
             if (movie.Id == Guid.Empty)
             {
                 movieEntity.CreatedAt = DateTime.Now;

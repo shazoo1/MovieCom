@@ -25,7 +25,7 @@ namespace MovieCom.Service.Services
 
         public IEnumerable<ActorModel> GetByIds(IEnumerable<Guid> guids)
         {
-            var actors = (IEnumerable<Actor>)_uow.Get<Actor>().GetAllWhere(x => guids.Contains(x.Id));
+            var actors = _uow.Get<Actor>().GetAllWhere(x => guids.Contains(x.Id));
             return _mapper.Map<IEnumerable<ActorModel>>(actors);
         }
 

@@ -15,6 +15,6 @@ namespace MovieCom.Domain.Models.Entities
         public string Bio { get; set; }
         public DateTime BirthDate { get; set; }
         public virtual ICollection<Movie> Movies { get; set; }
-        public Media Portrait { get; set; }
+        public virtual Media Portrait { get; set; }
     }
 }

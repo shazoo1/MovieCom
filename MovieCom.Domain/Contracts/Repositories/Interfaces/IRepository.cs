@@ -18,6 +18,7 @@ namespace MovieCom.Domain.Contracts.Repositories.Interfaces
         void Update(T item);
         void Remove(T item);
         void Remove(Guid id);
+        IEnumerable<T> GetByIds(IEnumerable<Guid> ids);
     }
 
     public interface IRepository { }
