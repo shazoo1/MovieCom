@@ -29,15 +29,23 @@ namespace MovieCom.Service.Services
             movieEntity.Actors = (ICollection<Actor>)_uow.Get<Actor>().GetByIds(actorIds);
             movieEntity.Genres = (ICollection<Genre>)_uow.Get<Genre>().GetByIds(genreIds);
 
-            movieEntity.Poster.Id = Guid.NewGuid();
-            movieEntity.Poster.CreatedAt = DateTime.Now;
+            if (movieEntity.Poster != null)
+            {
+                movieEntity.Poster.Id = Guid.NewGuid();
+                movieEntity.Poster.CreatedAt = DateTime.Now;
+            }
 
             if (movie.Id == Guid.Empty)
             {
                 movieEntity.CreatedAt = DateTime.Now;
+                movieEntity.Id = Guid.NewGuid();
+                movieRepo.Add(movieEntity);
             }
-            movieEntity.LastModifiedAt = DateTime.Now;
-            movieRepo.Update(movieEntity);
+            else
+            {
+                movieEntity.LastModifiedAt = DateTime.Now;
+                movieRepo.Update(movieEntity);
+            }
         }
 
         public MovieModel GetById(Guid id)

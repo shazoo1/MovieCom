@@ -65,8 +65,11 @@ namespace MovieCom.Web.Controllers
             var genreService = _serviceHost.GetService<GenreService>();
             var actorService = _serviceHost.GetService<ActorService>();
 
-            movie.Poster = new MediaModel { Link = model.Movie.PosterLink, Type = MediaType.Poster };
-            
+            if (!string.IsNullOrEmpty(model.Movie.PosterLink))
+            {
+                movie.Poster = new MediaModel { Link = model.Movie.PosterLink, Type = MediaType.Poster };
+            }
+
             movieService.AddOrUpdate(movie);
             return RedirectToAction("Index", "Movie");
         }

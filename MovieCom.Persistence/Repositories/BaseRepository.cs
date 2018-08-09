@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -98,7 +99,8 @@ namespace MovieCom.Persistence.Repositories
                     _dbSet.Attach(item);
                 }
                 dbEntityEntry.State = EntityState.Modified;
-                _context.SaveChanges();
+                var result = _context.SaveChanges();
+                _context.Database.Log = s => Debug.WriteLine(s);
             }
         }
 
