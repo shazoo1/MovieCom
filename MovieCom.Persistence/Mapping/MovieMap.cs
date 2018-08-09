@@ -35,15 +35,12 @@ namespace MovieCom.Persistence.Mapping
                 .IsRequired()
                 .HasMaxLength(500);
 
-            //Constraints?
             Property(x => x.Year)
                 .IsRequired();
 
-            //Max/min values constraints?
             Property(x => x.Imdb)
                 .HasPrecision(3, 1);
-
-            //Max/min values constraints?
+            
             Property(x => x.Rating)
                 .HasPrecision(3, 1);
         }

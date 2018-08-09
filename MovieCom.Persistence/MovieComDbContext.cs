@@ -43,8 +43,8 @@ namespace MovieCom.Persistence
             modelBuilder.Configurations.Add(new CommentMap());
             modelBuilder.Configurations.Add(new GenreMap());
             modelBuilder.Configurations.Add(new GradeMap());
-            modelBuilder.Configurations.Add(new MediaMap());
             modelBuilder.Configurations.Add(new MovieMap());
+            modelBuilder.Configurations.Add(new MediaMap());
 
             modelBuilder.Configurations.Add(new RoleMap());
             modelBuilder.Configurations.Add(new UserMap());

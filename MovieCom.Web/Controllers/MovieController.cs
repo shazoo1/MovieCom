@@ -60,8 +60,12 @@ namespace MovieCom.Web.Controllers
         [Authorize(Roles = Roles.Admin)]
         public ActionResult Edit(AddMovieViewModel model)
         {
-            var movie = _mapper.Map<MovieModel>(model.Movie);
             var movieService = _serviceHost.GetService<MovieService>();
+            movieService.AddOrUpdate(_mapper.Map<MovieModel>(model.Movie));
+
+            return RedirectToAction("Index", "Movie");
+            var movie = _mapper.Map<MovieModel>(model.Movie);
+            //var movieService = _serviceHost.GetService<MovieService>();
             var genreService = _serviceHost.GetService<GenreService>();
             var actorService = _serviceHost.GetService<ActorService>();
 
