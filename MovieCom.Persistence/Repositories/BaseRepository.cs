@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using MovieCom.Domain.Contracts;
 using MovieCom.Domain.Contracts.Repositories.Interfaces;
 using MovieCom.Domain.Models.Entities;
 
@@ -14,13 +15,13 @@ namespace MovieCom.Persistence.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        protected readonly DbContext _context;
+        protected readonly IMovieComDbContext _context;
         protected readonly DbSet<T> _dbSet;
         protected static readonly object _locker = new object();
-        public BaseRepository(DbContext context)
+        public BaseRepository(IMovieComDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<T>();
+            _dbSet = context.DbContext.Set<T>();
 
         }
         public void Add(T item)
@@ -28,7 +29,6 @@ namespace MovieCom.Persistence.Repositories
             lock (_locker)
             {
                 _dbSet.Add(item);
-                _context.SaveChanges();
             }
         }
 
@@ -37,7 +37,6 @@ namespace MovieCom.Persistence.Repositories
             lock (_locker)
             {
                 _dbSet.AddRange(items);
-                _context.SaveChanges();
             }
         }
 
@@ -75,7 +74,6 @@ namespace MovieCom.Persistence.Repositories
             lock (_locker)
             {
                 _dbSet.Remove(item);
-                _context.SaveChanges();
             }
         }
 
@@ -85,7 +83,6 @@ namespace MovieCom.Persistence.Repositories
             {
                 var item = GetById(id);
                 if (item != null) _dbSet.Remove(item);
-                _context.SaveChanges();
             }
         }
 
@@ -93,14 +90,12 @@ namespace MovieCom.Persistence.Repositories
         {
             lock (_locker)
             {
-                DbEntityEntry dbEntityEntry = _context.Entry(item);
+                DbEntityEntry dbEntityEntry = _context.DbContext.Entry(item);
                 if (dbEntityEntry.State == EntityState.Detached)
                 {
                     _dbSet.Attach(item);
                 }
                 dbEntityEntry.State = EntityState.Modified;
-                var result = _context.SaveChanges();
-                _context.Database.Log = s => Debug.WriteLine(s);
             }
         }
 

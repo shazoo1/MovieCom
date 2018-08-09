@@ -3,7 +3,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Актёры</h2>
+<div class="admins-list-page-title">
+    <h1>Актёры</h1>
+    <button type="button" class="btn btn-success" onclick="location.href='@Html.ActionLink("Добавить", "Edit", "Actors")'">Success</button>
+</div>
 <table class="table table-striped">
     <thead>
         <tr>

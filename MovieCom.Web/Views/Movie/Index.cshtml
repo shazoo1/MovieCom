@@ -18,7 +18,7 @@
         @foreach (var movie in Model.Movies)
         {
             
-            <tr onclick="location.href = '@Url.Action("Edit", "Movie", new { id = movie.Id})'">
+            <tr onclick="location.href = '@Url.Action("Details", "Movie", new { movieId = movie.Id})'">
                 <td scope="row">@Html.DisplayFor(modelItem => movie.Title)</td>
                 <td scope="row">@Html.DisplayFor(modelItem => movie.Year)</td>
                 <td scope="row">@Html.DisplayFor(modelItem => movie.Imdb)</td>

@@ -26,8 +26,8 @@ namespace MovieCom.Service.Services
             var actorIds = movie.Actors.Select(x => x.Id);
             var genreIds = movie.Genres.Select(x => x.Id);
 
-            movieEntity.Actors = (ICollection<Actor>)_uow.Get<Actor>().GetByIds(actorIds);
-            movieEntity.Genres = (ICollection<Genre>)_uow.Get<Genre>().GetByIds(genreIds);
+            movieEntity.Actors = _uow.Get<Actor>().GetByIds(actorIds).ToList();
+            movieEntity.Genres = _uow.Get<Genre>().GetByIds(genreIds).ToList();
 
             if (movieEntity.Poster != null)
             {
@@ -46,6 +46,7 @@ namespace MovieCom.Service.Services
                 movieEntity.LastModifiedAt = DateTime.Now;
                 movieRepo.Update(movieEntity);
             }
+            _uow.SaveChanges();
         }
 
         public MovieModel GetById(Guid id)

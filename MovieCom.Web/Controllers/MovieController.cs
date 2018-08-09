@@ -135,5 +135,20 @@ namespace MovieCom.Web.Controllers
             genreService.AddOrUpdate(_mapper.Map<GenreModel>(genre));
             return RedirectToAction("Genres", "Movie");
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Details(Guid movieId)
+        {
+            MovieViewModel model = new MovieViewModel();
+            var movieService = _serviceHost.GetService<MovieService>();
+
+            if (movieId != Guid.Empty)
+            {
+                var movie = movieService.GetById(movieId);
+                model = _mapper.Map<MovieViewModel>(movie);
+            }
+            return View(model);
+        }
     }
 }

@@ -14,9 +14,9 @@ namespace MovieCom.Persistence
     {
         private readonly MovieComDbContext _context;
         private readonly Dictionary<Type, IRepository> _repositories;
-        public UnitOfWork(MovieComDbContext context)
+        public UnitOfWork()
         {
-            _context = context;
+            _context = new MovieComDbContext();
             _repositories = new Dictionary<Type, IRepository>();
         }
 

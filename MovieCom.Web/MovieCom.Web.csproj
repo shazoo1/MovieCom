@@ -431,6 +431,7 @@
     <Content Include="Views\Actors\Index.cshtml" />
     <Content Include="Views\Movie\Genres.cshtml" />
     <Content Include="Views\Movie\Partial\EditGenrePartialView.cshtml" />
+    <Content Include="Views\Movie\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

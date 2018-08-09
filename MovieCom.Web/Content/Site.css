@@ -35,3 +35,14 @@ textarea {
     text-align: center;
     color: white;
 }
+
+.admins-list-page-title{
+    width: 100%;
+    padding-left: 5%;
+    display: inline-block;
+    padding-top: 20px;
+    height: 75px;
+}
+.admins-list-page-title h1{
+    display: inline;
+}

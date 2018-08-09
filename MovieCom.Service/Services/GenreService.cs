@@ -46,7 +46,7 @@ namespace MovieCom.Service.Services
                 genreEntity.LastModifiedAt = DateTime.Now;
                 _uow.Get<Genre>().Update(genreEntity);
             }
-
+            _uow.SaveChanges();
         }
     }
 }
