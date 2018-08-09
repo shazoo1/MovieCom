@@ -23,17 +23,21 @@ namespace MovieCom.Service.Services
         {
             var repo = _uow.Get<Movie>();
             var moentity = repo.GetById(movie.Id);
-            moentity = _mapper.Map<Movie>(movie);
-            moentity.Poster = new Media
-            {
-                Id = Guid.NewGuid(),
-                Link = "lkhbflsdj sf",
-                Type = Common.Enums.MediaType.Poster,
-                CreatedAt = DateTime.Now,
-                LastModifiedAt = DateTime.Now
-            };
+            _mapper.Map<MovieModel, Movie>(movie, moentity);
+            var actorIds = movie.Actors.Select(x => x.Id);
+            var genreIds = movie.Genres.Select(x => x.Id);
 
-            repo.Update(moentity);
+            moentity.Actors = _uow.Get<Actor>().GetByIds(actorIds).ToList();
+            moentity.Genres = _uow.Get<Genre>().GetByIds(genreIds).ToList();
+            if (moentity.Poster != null)
+            {
+                moentity.Poster.Id = Guid.NewGuid();
+                moentity.Poster.CreatedAt = DateTime.Now;
+                //mediaRepo.Add(movieEntity.Poster);
+            }
+            
+
+            //repo.Update(moentity);
             _uow.SaveChanges();
 
             return;
@@ -45,18 +49,7 @@ namespace MovieCom.Service.Services
             var mediaRepo = _uow.Get<Media>();
             
 
-            var actorIds = movie.Actors.Select(x => x.Id);
-            var genreIds = movie.Genres.Select(x => x.Id);
 
-            //movieEntity.Actors = _uow.Get<Actor>().GetByIds(actorIds).ToList();
-            //movieEntity.Genres = _uow.Get<Genre>().GetByIds(genreIds).ToList();
-
-            if (movieEntity.Poster != null)
-            {
-                movieEntity.Poster.Id = Guid.NewGuid();
-                movieEntity.Poster.CreatedAt = DateTime.Now;
-                //mediaRepo.Add(movieEntity.Poster);
-            }
 
             if (movie.Id == Guid.Empty)
             {

@@ -61,18 +61,19 @@ namespace MovieCom.Web.Controllers
         public ActionResult Edit(AddMovieViewModel model)
         {
             var movieService = _serviceHost.GetService<MovieService>();
-            movieService.AddOrUpdate(_mapper.Map<MovieModel>(model.Movie));
-
-            return RedirectToAction("Index", "Movie");
-            var movie = _mapper.Map<MovieModel>(model.Movie);
-            //var movieService = _serviceHost.GetService<MovieService>();
-            var genreService = _serviceHost.GetService<GenreService>();
-            var actorService = _serviceHost.GetService<ActorService>();
-
+            var movie = _mapper.Map<MovieViewModel, MovieModel>(model.Movie);
             if (!string.IsNullOrEmpty(model.Movie.PosterLink))
             {
                 movie.Poster = new MediaModel { Link = model.Movie.PosterLink, Type = MediaType.Poster };
             }
+            movieService.AddOrUpdate(movie);
+
+            return RedirectToAction("Index", "Movie");
+            //var movie = _mapper.Map<MovieModel>(model.Movie);
+            //var movieService = _serviceHost.GetService<MovieService>();
+            var genreService = _serviceHost.GetService<GenreService>();
+            var actorService = _serviceHost.GetService<ActorService>();
+
 
             movieService.AddOrUpdate(movie);
             return RedirectToAction("Index", "Movie");
