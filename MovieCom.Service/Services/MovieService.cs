@@ -19,48 +19,42 @@ namespace MovieCom.Service.Services
 
         }
 
-        public void AddOrUpdate(MovieModel movie)
+        public void AddOrUpdate(MovieModel movieModel)
         {
-            var repo = _uow.Get<Movie>();
-            var moentity = repo.GetById(movie.Id);
-            _mapper.Map<MovieModel, Movie>(movie, moentity);
-            var actorIds = movie.Actors.Select(x => x.Id);
-            var genreIds = movie.Genres.Select(x => x.Id);
+            var movieRepo = _uow.Get<Movie>();
+            var movieEntity = movieRepo.GetById(movieModel.Id);
+            bool isNew = movieEntity == null;
+            if (isNew)
+                movieEntity = new Movie();
 
-            moentity.Actors = _uow.Get<Actor>().GetByIds(actorIds).ToList();
-            moentity.Genres = _uow.Get<Genre>().GetByIds(genreIds).ToList();
-            if (moentity.Poster != null)
+            _mapper.Map<MovieModel, Movie>(movieModel, movieEntity);
+            if (movieEntity.Poster != null)
             {
-                moentity.Poster.Id = Guid.NewGuid();
-                moentity.Poster.CreatedAt = DateTime.Now;
-                //mediaRepo.Add(movieEntity.Poster);
-            }
-            
-
-            //repo.Update(moentity);
-            _uow.SaveChanges();
-
-            return;
-            //var movieRepo = _uow.Get<Movie>();
-            //var movieEntity = _mapper.Map<Movie>(movie);
-            var movieEntity = _uow.Get<Movie>().GetById(movie.Id);
-            _mapper.Map(movie, movieEntity);
-
-            var mediaRepo = _uow.Get<Media>();
-            
-
-
-
-            if (movie.Id == Guid.Empty)
-            {
-                movieEntity.CreatedAt = DateTime.Now;
-                movieEntity.Id = Guid.NewGuid();
-                //movieRepo.Add(movieEntity);
+                movieModel.Poster.Id = movieEntity.Poster.Id;
+                //TODO :: Check if the link is changed
+                movieEntity.Poster.LastModifiedAt = DateTime.Now;
             }
             else
             {
-                movieEntity.LastModifiedAt = DateTime.Now;
-                //movieRepo.Update(movieEntity);
+                movieEntity.Poster = new Media
+                {
+                    Id = Guid.NewGuid(),
+                    Link = "",
+                    CreatedAt = DateTime.Now,
+                    Type = Common.Enums.MediaType.Poster,
+                    LastModifiedAt = DateTime.Now
+                };
+            }
+
+            var actorIds = movieModel.Actors.Select(x => x.Id);
+            movieEntity.Actors = (ICollection<Actor>)_uow.Get<Actor>().GetByIds(actorIds);
+            var genreIds = movieModel.Genres.Select(x => x.Id);
+            movieEntity.Genres = (ICollection<Genre>)_uow.Get<Genre>().GetByIds(genreIds);
+
+            if (isNew)
+            {
+                movieEntity.Id = Guid.NewGuid();
+                movieRepo.Add(movieEntity);
             }
             _uow.SaveChanges();
         }
