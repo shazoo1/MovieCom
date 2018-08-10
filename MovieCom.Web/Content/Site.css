@@ -46,3 +46,12 @@ textarea {
 .admins-list-page-title h1{
     display: inline;
 }
+
+.admins-list-page-body tr:hover {
+    background-color: #D2E8BF !important;
+}
+
+.content-page{
+    width:80%;
+
+}

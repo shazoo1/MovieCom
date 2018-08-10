@@ -69,14 +69,6 @@ namespace MovieCom.Web.Controllers
             movieService.AddOrUpdate(movie);
 
             return RedirectToAction("Index", "Movie");
-            //var movie = _mapper.Map<MovieModel>(model.Movie);
-            //var movieService = _serviceHost.GetService<MovieService>();
-            var genreService = _serviceHost.GetService<GenreService>();
-            var actorService = _serviceHost.GetService<ActorService>();
-
-
-            movieService.AddOrUpdate(movie);
-            return RedirectToAction("Index", "Movie");
         }
 
         [HttpGet]
@@ -102,7 +94,7 @@ namespace MovieCom.Web.Controllers
                     //Save file content goes here
                     if (file != null && file.ContentLength > 0)
                     {
-                        var originalDirectory = new DirectoryInfo(string.Format("{0}Uploads\\", Server.MapPath(@"\")));
+                        var originalDirectory = new DirectoryInfo(string.Format("{0}Uploads\\",Server.MapPath("~/")));
                         var fileExtension = Path.GetExtension(file.FileName);
                         var fileName1 = Path.GetRandomFileName();
                         var pathString = originalDirectory.ToString();

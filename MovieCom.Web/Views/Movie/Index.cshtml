@@ -2,29 +2,35 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Список фильмов</h2>
-@Html.ActionLink("Добавить", "Edit", "Movie") 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Название</th>
-            <th scope="col">Год</th>
-            <th scope="col">Рейтинг IMDB</th>
-            <th scope="col">Пользоавтельский рейтинг</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var movie in Model.Movies)
-        {
-            
-            <tr onclick="location.href = '@Url.Action("Details", "Movie", new { movieId = movie.Id})'">
-                <td scope="row">@Html.DisplayFor(modelItem => movie.Title)</td>
-                <td scope="row">@Html.DisplayFor(modelItem => movie.Year)</td>
-                <td scope="row">@Html.DisplayFor(modelItem => movie.Imdb)</td>
-                <td scope="row">@Html.DisplayFor(modelItem => movie.Rating)</td>
-            </tr>
-        
+<div >
+    <div class="jumbotron">
+        <h2>Список фильмов</h2>
+        @if (User.IsInRole(MovieCom.Common.Enums.Roles.Admin)) { 
+        <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Edit", "Movie")'">Добавить</button>
         }
-    </tbody>
-</table>
+    </div>
+    <table class="table table-striped">
+        <tbody class="admins-list-page-body">
+            @foreach (var movie in Model.Movies)
+            {
+                <tr onclick="location.href='@Url.Action("Details", "Movie", new { movieId = movie.Id})'">
+                    <td>
+                        <img src="@movie.Poster.Link" />
+                    </td>
+                    <td>
+                        <h6>@movie.Title</h6>
+                        <p>(@movie.Year)</p>
+                        <p>
+                            <small>@movie.GenresString </small>
+                        </p>
+                    </td>
+                    <td>
+                        <p>IMDb: @movie.Imdb</p>
+                        <p>Рейтинг: @movie.Rating</p>
+                        <p>Всего голосов: @movie.Votes</p>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

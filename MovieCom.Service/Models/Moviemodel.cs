@@ -22,5 +22,7 @@ namespace MovieCom.Service.Models
         public IEnumerable<GenreModel> Genres { get; set; }
         public IEnumerable<CommentModel> Comments { get; set; }
         public IEnumerable<GradeModel> Grades { get; set; }
+        public string GenresString { get; set; }
+        public double Votes { get; set; }
     }
 }

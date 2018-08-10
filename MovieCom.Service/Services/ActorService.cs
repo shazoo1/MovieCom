@@ -49,6 +49,7 @@ namespace MovieCom.Service.Services
                 actorEntity.LastModifiedAt = DateTime.Now;
             _uow.Get<Actor>().Update(actorEntity);
             }
+            _uow.SaveChanges();
         }
 
         public void Delete(Guid id)

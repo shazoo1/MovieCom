@@ -43,6 +43,7 @@ namespace MovieCom.Persistence.Mapping
             
             Property(x => x.Rating)
                 .HasPrecision(3, 1);
+            
         }
     }
 }

@@ -17,7 +17,18 @@ namespace MovieCom.Service.Mapping
             CreateMap<Genre, GenreModel>();
             CreateMap<Grade, GradeModel>();
             CreateMap<Media, MediaModel>();
-            CreateMap<Movie, MovieModel>();
+            CreateMap<Movie, MovieModel>()
+                .ForMember(d => d.GenresString, opt => opt.ResolveUsing((s, d, i, context) => {
+                    var genString = "";
+                    foreach (var genre in s.Genres)
+                    {
+                        genString += genre.Name + ", ";
+                    }
+                    return genString.Substring(0, genString.Length-2);
+                }))
+                .ForMember(d => d.Votes, opt => opt.ResolveUsing((s,d,i,context)=> {
+                    return s.Grades.Count;
+                }));
         }
     }
     
@@ -29,7 +40,8 @@ namespace MovieCom.Service.Mapping
             CreateMap<CommentModel, Comment>();
             CreateMap<GenreModel, Genre>();
             CreateMap<GradeModel, Grade>();
-            CreateMap<MediaModel, Media>();
+            CreateMap<MediaModel, Media>()
+                .ForMember(d => d.Id, opt => opt.Ignore());
             CreateMap<MovieModel, Movie>();
         }
     }

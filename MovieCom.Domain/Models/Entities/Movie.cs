@@ -14,6 +14,7 @@ namespace MovieCom.Domain.Models.Entities
         public int Year { get; set; }
         public decimal Imdb { get; set; }
         public decimal Rating { get; set; }
+        public double Votes { get; set; }
         public virtual Media Poster { get; set; }
         public virtual ICollection<Actor> Actors { get; set; }
         public virtual ICollection<Media> Media { get; set; }

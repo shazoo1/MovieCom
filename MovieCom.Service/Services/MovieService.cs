@@ -30,8 +30,6 @@ namespace MovieCom.Service.Services
             _mapper.Map<MovieModel, Movie>(movieModel, movieEntity);
             if (movieEntity.Poster != null)
             {
-                movieModel.Poster.Id = movieEntity.Poster.Id;
-                //TODO :: Check if the link is changed
                 movieEntity.Poster.LastModifiedAt = DateTime.Now;
             }
             else
@@ -45,7 +43,10 @@ namespace MovieCom.Service.Services
                     LastModifiedAt = DateTime.Now
                 };
             }
-
+            if (movieEntity.Poster.Id == Guid.Empty)
+            {
+                movieEntity.Poster.Id = Guid.NewGuid();
+            }
             var actorIds = movieModel.Actors.Select(x => x.Id);
             movieEntity.Actors = (ICollection<Actor>)_uow.Get<Actor>().GetByIds(actorIds);
             var genreIds = movieModel.Genres.Select(x => x.Id);

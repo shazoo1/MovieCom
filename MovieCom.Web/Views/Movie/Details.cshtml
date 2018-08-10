@@ -3,35 +3,46 @@
     ViewBag.Title = "Details";
 }
 
-<h2>@Model.Title</h2>
-<div class="col-md-8">
-    <div>
-        @Html.LabelFor(m => m.Year)
-        <p>@Model.Year</p>
-    </div>
-    <div>
-        @Html.LabelFor(m => m.Genres)
+<div class="jumbotron">
+    <h2>@Model.Title</h2>
+    <h4>"@Model.Slogan"</h4>
+    @if (User.IsInRole(MovieCom.Common.Enums.Roles.Admin))
+    {
+        <button class="btn btn-success" onclick="location.href='@Url.Action("Edit", "Movie", new { id = Model.Id})'">Редактировать</button>
+    }
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div>
+            @Html.LabelFor(m => m.Year)
+            <p>@Model.Year</p>
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Genres)
 
-    </div>
-    <div>
-        @Html.LabelFor(m => m.Actors)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Actors)
 
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Imdb)
+            <p>@Model.Imdb</p>
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Rating)
+            <p>@Model.Rating</p>
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Description)
+            <p>@Model.Description</p>
+        </div>
     </div>
-    <div>
-        @Html.LabelFor(m => m.Imdb)
-        <p>@Model.Imdb</p>
-    </div>
-    <div>
-        @Html.LabelFor(m => m.Rating)
-        <p>@Model.Rating</p>
-    </div>
-    <div>
-        @Html.LabelFor(m => m.Description)
-        <p>@Model.Description</p>
+    <div class="col-md-4">
+        <img src="@Model.PosterLink" />
+        <p>@Model.Slogan</p>
     </div>
 </div>
-<div class="col-md-4">
-    @Html.ActionLink("Редактировать","Edit", "Movie", new { id = Model.Id }, null);
-    <img src="@Model.PosterLink" />
-    <p>@Model.Slogan</p>
+<div>
+    <p>Комментарии:</p>
 </div>
