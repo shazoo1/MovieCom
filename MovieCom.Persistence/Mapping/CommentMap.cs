@@ -20,7 +20,6 @@ namespace MovieCom.Persistence.Mapping
                 .WithMany(y => y.Comments);
             HasOptional(x => x.ReplyTo)
                 .WithMany(y => y.Replies);
-            //Movies?
             HasMany(x => x.Replies)
                 .WithOptional(y => y.ReplyTo);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AutoMapper;
+using MovieCom.Domain.Entities.Identity;
 using MovieCom.Service.Models;
 using MovieCom.Web.Models.Actors;
 using MovieCom.Web.Models.Movie;
@@ -31,6 +32,18 @@ namespace MoviewCom.Web.Mapping
             CreateMap<ActorModel, EditActorViewModel>()
                 .ForMember(d => d.BirthDate, opt => opt.ResolveUsing((s, d, i, context) => {
                     return s.BirthDate.ToString("yyyy-MM-dd");
+                }));
+            CreateMap<CommentModel, CommentViewModel>()
+                .ForMember(d => d.MovieId, opt => opt.ResolveUsing((s, d, i, context) =>
+                {
+                    return s.Movie.Id;
+                }))
+                .ForMember(d => d.UserId, opt => opt.ResolveUsing((s, d, i, context) => {
+                    return s.User.Id;
+                }))
+                .ForMember(d => d.ReplyTo, opt => opt.ResolveUsing((s, d, i, context) =>
+                {
+                    return s.Id;
                 }));
         }
     }
@@ -67,6 +80,18 @@ namespace MoviewCom.Web.Mapping
                     return DateTime.Parse(s.BirthDate);
                 }));
             CreateMap<GenreViewModel, GenreModel>();
+            CreateMap<CommentViewModel, CommentModel>()
+                .ForMember(d => d.ReplyTo, opt => opt.ResolveUsing((s, d, i, context) =>
+                {
+                    return new CommentModel { Id = s.ReplyTo };
+                }))
+                .ForMember(d => d.Movie, opt => opt.ResolveUsing((s, d, i, context) => {
+                    return new MovieModel { Id = s.MovieId };
+                }))
+                .ForMember(d => d.User, opt => opt.ResolveUsing((s, d, i, context) => {
+                    return new User { Id = s.UserId };
+                }));
+            CreateMap<MovieVoteViewModel, GradeModel>();
         }
     }
 }

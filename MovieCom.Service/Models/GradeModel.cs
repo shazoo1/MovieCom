@@ -11,6 +11,7 @@ namespace MovieCom.Service.Models
     public class GradeModel : BaseModel
     {
         public int Value { get; set; }
-        public User User { get; set; }
+        public Guid UserId { get; set; }
+        public Guid MovieId { get; set; }
     }
 }

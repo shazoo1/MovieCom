@@ -76,7 +76,8 @@
   <ItemGroup>
     <Compile Include="Contracts\IMovieComDbContext.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
-    <Compile Include="Contracts\Repositories\Interfaces\IRepository.cs" />
+    <Compile Include="Contracts\Repositories\Interfaces\IBaseRepository.cs" />
+    <Compile Include="Contracts\Repositories\Interfaces\IMovieRepository.cs" />
     <Compile Include="Models\Entities\Actor.cs" />
     <Compile Include="Models\Entities\BaseEntity.cs" />
     <Compile Include="Models\Entities\Comment.cs" />

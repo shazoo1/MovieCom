@@ -59,6 +59,7 @@ namespace MovieCom.Web
             container.RegisterType<IMovieService, MovieService>();
             container.RegisterType<IGenreService, GenreService>();
             container.RegisterType<IActorService, ActorService>();
+            container.RegisterType<ICommentService, CommentService> ();
 
             //TODO :: Register instances
             container.RegisterInstance(Mapping.Configuration.Create());

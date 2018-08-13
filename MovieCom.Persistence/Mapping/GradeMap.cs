@@ -15,8 +15,9 @@ namespace MovieCom.Persistence.Mapping
             ToTable("Grades");
             HasKey(x => x.Id);
             HasRequired(x => x.User);
-
-            //Constraint?
+            HasRequired(x => x.Movie)
+                .WithMany(y => y.Grades);
+            
             Property(x => x.Value)
                 .IsRequired();
         }

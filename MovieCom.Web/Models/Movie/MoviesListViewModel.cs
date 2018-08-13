@@ -9,5 +9,7 @@ namespace MovieCom.Web.Models.Movie
     public class MoviesListViewModel
     {
         public IEnumerable<MovieModel> Movies { get; set; }
+
+        public IEnumerable<MovieModel> TopTenRating { get; set; }
     }
 }

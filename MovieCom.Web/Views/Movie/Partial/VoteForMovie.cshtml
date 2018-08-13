@@ -1,0 +1,12 @@
+﻿@model MovieCom.Web.Models.Movie.MovieVoteViewModel
+
+@if (User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm("Vote", "Movie", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.MovieId)
+        @Html.TextBoxFor(m => m.Value, new { @type = "number", @min = "1", @max = "10", @class = "form-control", @value = "10" })
+
+        <input type="submit" value="Проголосовать" />
+    }
+}

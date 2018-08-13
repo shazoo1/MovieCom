@@ -25,6 +25,8 @@ namespace MovieCom.Persistence
             if (_repositories.ContainsKey(typeof(T)))
                 return _repositories[typeof(T)] as IBaseRepository<T>;
             var repositoryType = typeof(BaseRepository<>).MakeGenericType(typeof(T));
+            if (typeof(T) == typeof(Movie))
+                repositoryType = typeof(MovieRepository);
             var repository = (IBaseRepository<T>)Activator.CreateInstance(repositoryType, this._context);
             _repositories.Add(typeof(T), repository);
 

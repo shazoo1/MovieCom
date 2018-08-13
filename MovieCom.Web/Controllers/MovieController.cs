@@ -12,12 +12,14 @@ using MovieCom.Web.Controllers.Base;
 using MovieCom.Web.Models.Movie;
 using MovieCom.Web.Helpers.Interfaces;
 using System.IO;
+using Microsoft.AspNet.Identity;
+using MovieCom.Domain.Entities.Identity;
 
 namespace MovieCom.Web.Controllers
 {
     public class MovieController : BaseController
     {
-        
+
 
         public MovieController(IServiceHost serviceHost, IMapper mapper) : base(mapper, serviceHost)
         {
@@ -30,9 +32,10 @@ namespace MovieCom.Web.Controllers
             var movieService = _serviceHost.GetService<MovieService>();
 
             model.Movies = movieService.GetAll();
+            model.TopTenRating = movieService.GetTopRating(10);
             return View(model);
         }
-        
+
         [HttpGet]
         [Authorize(Roles = Roles.Admin)]
         public ActionResult Edit(Guid? id)
@@ -94,14 +97,14 @@ namespace MovieCom.Web.Controllers
                     //Save file content goes here
                     if (file != null && file.ContentLength > 0)
                     {
-                        var originalDirectory = new DirectoryInfo(string.Format("{0}Uploads\\",Server.MapPath("~/")));
+                        var originalDirectory = new DirectoryInfo(string.Format("{0}Uploads\\", Server.MapPath("~/")));
                         var fileExtension = Path.GetExtension(file.FileName);
-                        var fileName1 = Path.GetRandomFileName();
+                        var randomFileName = Path.GetRandomFileName();
                         var pathString = originalDirectory.ToString();
                         bool exists = System.IO.Directory.Exists(pathString);
                         if (!exists)
                             System.IO.Directory.CreateDirectory(pathString);
-                        path = string.Format("{0}{1}", pathString, fileName1 + fileExtension);
+                        path = string.Format("{0}{1}", pathString, randomFileName + fileExtension);
                         file.SaveAs(path);
                     }
                 }
@@ -114,7 +117,7 @@ namespace MovieCom.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize (Roles = Roles.Admin)]
+        [Authorize(Roles = Roles.Admin)]
         public ActionResult Genres()
         {
             var model = new GenresListViewModel();
@@ -125,7 +128,7 @@ namespace MovieCom.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles=Roles.Admin)]
+        [Authorize(Roles = Roles.Admin)]
         public ActionResult EditGenre(GenreViewModel genre)
         {
             var genreService = _serviceHost.GetService<IGenreService>();
@@ -138,14 +141,38 @@ namespace MovieCom.Web.Controllers
         public ActionResult Details(Guid movieId)
         {
             MovieViewModel model = new MovieViewModel();
-            var movieService = _serviceHost.GetService<MovieService>();
+            var movieService = _serviceHost.GetService<IMovieService>();
 
             if (movieId != Guid.Empty)
             {
                 var movie = movieService.GetById(movieId);
                 model = _mapper.Map<MovieViewModel>(movie);
             }
+            model.Comments = model.Comments.OrderBy(x => x.CreatedAt);
             return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddComment(CommentViewModel commentViewModel)
+        {
+            var commentService = _serviceHost.GetService<ICommentService>();
+            var commentModel = _mapper.Map<CommentModel>(commentViewModel);
+            commentModel.UserId = Guid.Parse(User.Identity.GetUserId());
+            commentService.AddOrUpdate(commentModel);
+            return RedirectToAction("Details", "Movie", new { movieId = commentViewModel.MovieId });
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Vote(MovieVoteViewModel model)
+        {
+            var grade = _mapper.Map<GradeModel>(model);
+            grade.UserId = Guid.Parse(User.Identity.GetUserId());
+            var movieService = _serviceHost.GetService<IMovieService>();
+            movieService.VoteForMovie(grade);
+
+            return RedirectToAction("Details", "Movie", new { movieId = model.MovieId });
         }
     }
 }

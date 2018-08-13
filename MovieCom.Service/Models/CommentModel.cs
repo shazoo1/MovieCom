@@ -15,6 +15,7 @@ namespace MovieCom.Service.Models
         public DateTime LastModifiedAt { get; set; }
         public MovieModel Movie { get; set; }
         public User User { get; set; }
+        public Guid UserId { get; set; }
         public CommentModel ReplyTo { get; set; }
         public ICollection<CommentModel> Replies { get; set; }
     }

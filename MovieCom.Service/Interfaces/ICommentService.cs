@@ -9,12 +9,8 @@ using MovieCom.Service.Models;
 
 namespace MovieCom.Service.Interfaces
 {
-    public interface IMovieService : IBaseService<Movie>
+    public interface ICommentService : IBaseService<Comment>
     {
-        void AddOrUpdate(MovieModel movie);
-        MovieModel GetById(Guid id);
-        IEnumerable<MovieModel> GetAll();
-        void Delete(Guid id);
-        void VoteForMovie(GradeModel gradeModel);
+        void AddOrUpdate(CommentModel commentModel);
     }
 }

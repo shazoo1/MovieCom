@@ -1,0 +1,14 @@
+﻿@model MovieCom.Web.Models.Movie.CommentViewModel
+
+@using (Html.BeginForm("AddComment", "Movie", FormMethod.Post, new { @class = "form-group" }))
+{
+    @Html.HiddenFor(m => m.MovieId)
+    @Html.HiddenFor(m => m.UserId)
+    @Html.HiddenFor(m => m.ReplyTo, new { @id = "replyToId"})
+
+    @Html.LabelFor(m => m.Text);
+    @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @id = "commentField" })
+    @Html.ValidationMessageFor(m => m.Text);
+
+    <input type="submit" value="Комментировать" />
+}
