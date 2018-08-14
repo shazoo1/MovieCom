@@ -38,11 +38,16 @@ namespace MovieCom.Web.Models.Movie
         public string PosterLink { get; set; }
 
         [Display(Name = "В ролях")]
-        public IEnumerable<Guid> Actors { get; set; }
+        public IEnumerable<Guid> ActorsIds { get; set; }
+        [Display(Name = "В ролях")]
+
+        public IEnumerable<ActorModel> Actors { get; set; }
 
 
         [Display(Name = "Жанр")]
-        public IEnumerable<Guid> Genres { get; set; }
+        public IEnumerable<Guid> GenresIds { get; set; }
+        [Display(Name = "Жанр")]
+        public IEnumerable<GenreModel> Genres { get; set; }
 
         [Display(Name = "Оценка")]
         public int Grade { get; set; }

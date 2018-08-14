@@ -12,5 +12,6 @@ namespace MovieCom.Service.Interfaces
     public interface ICommentService : IBaseService<Comment>
     {
         void AddOrUpdate(CommentModel commentModel);
+        IEnumerable<CommentModel> GetCommentsTree(Guid movieId);
     }
 }

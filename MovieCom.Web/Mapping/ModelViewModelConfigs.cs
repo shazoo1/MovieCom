@@ -15,14 +15,14 @@ namespace MoviewCom.Web.Mapping
         public ModelToViewModel()
         {
             CreateMap<MovieModel, MovieViewModel>()
-                .ForMember(s => s.Actors, opt=> opt.ResolveUsing((s, d, i, context) => {
+                .ForMember(s => s.ActorsIds, opt=> opt.ResolveUsing((s, d, i, context) => {
                     if (s.Actors != null)
                     {
                         return s.Actors.Select(x => x.Id);
                     }
                     else return new List<Guid>();
                 }))
-                .ForMember(s => s.Genres, opt => opt.ResolveUsing((s, d, i, context) => {
+                .ForMember(s => s.GenresIds, opt => opt.ResolveUsing((s, d, i, context) => {
                     if (s.Genres != null)
                     {
                         return s.Genres.Select(x => x.Id);
@@ -55,9 +55,9 @@ namespace MoviewCom.Web.Mapping
             CreateMap<MovieViewModel, MovieModel>()
                 .ForMember(d => d.Actors, opt => opt.ResolveUsing((s, d, i, context) => {
                     var actors = new List<ActorModel>();
-                    if (s.Actors != null)
+                    if (s.ActorsIds != null)
                     {
-                        foreach (var actorId in s.Actors)
+                        foreach (var actorId in s.ActorsIds)
                         {
                             actors.Add(new ActorModel { Id = actorId });
                         }
@@ -66,9 +66,9 @@ namespace MoviewCom.Web.Mapping
                 }))
                 .ForMember(d => d.Genres, opt => opt.ResolveUsing((s, d, i, context) => {
                     var genres = new List<GenreModel>();
-                    if (s.Genres != null)
+                    if (s.GenresIds != null)
                     {
-                        foreach (var genreId in s.Genres)
+                        foreach (var genreId in s.GenresIds)
                         {
                             genres.Add(new GenreModel { Id = genreId });
                         }

@@ -142,13 +142,14 @@ namespace MovieCom.Web.Controllers
         {
             MovieViewModel model = new MovieViewModel();
             var movieService = _serviceHost.GetService<IMovieService>();
+            var commentsService = _serviceHost.GetService<ICommentService>();
 
             if (movieId != Guid.Empty)
             {
                 var movie = movieService.GetById(movieId);
                 model = _mapper.Map<MovieViewModel>(movie);
             }
-            model.Comments = model.Comments.OrderBy(x => x.CreatedAt);
+            model.Comments = commentsService.GetCommentsTree(movieId);
             return View(model);
         }
 

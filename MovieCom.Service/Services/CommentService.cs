@@ -45,5 +45,12 @@ namespace MovieCom.Service.Services
             }
             _uow.SaveChanges();
         }
+
+        public IEnumerable<CommentModel> GetCommentsTree(Guid movieId)
+        {
+            var commentsRepo = _uow.Get<Comment>();
+            var comments = commentsRepo.GetAll();//.Where(x => x.Movie.Id == movieId && x.ReplyTo == null).ToList();
+            return _mapper.Map<IEnumerable<CommentModel>>(comments).OrderBy(x => x.CreatedAt);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity;
 @model MovieCom.Web.Models.Movie.MovieViewModel
+@Scripts.Render("~/bundles/knockout")
 @{
     ViewBag.Title = "Details";
 }
@@ -19,12 +20,18 @@
             <p>@Model.Year</p>
         </div>
         <div>
-            @Html.LabelFor(m => m.Genres)
-
+            @Html.LabelFor(m => m.Genres)<br />
+            @foreach (var genre in Model.Genres)
+            {
+                <text>@genre.Name</text>
+            }
         </div>
         <div>
-            @Html.LabelFor(m => m.Actors)
-
+            @Html.LabelFor(m => m.Actors)<br />
+            @foreach (var actor in Model.Actors)
+            {
+                <text>@actor.DisplayName</text>
+            }
         </div>
         <div>
             @Html.LabelFor(m => m.Imdb)
@@ -47,24 +54,43 @@
 </div>
 <div class="container">
     <h2>Комментарии:</h2>
-    @foreach(var comment in Model.Comments)
-    {
+    <div class="table table-condensed" data-bind="foreach:comments">
         <div class="row">
             <div class="col-md-3">
-                <h4>@comment.User.UserName</h4>
-                <h5>@comment.CreatedAt</h5>
+                <h4 data-bind="text:User.UserName"></h4>
+                <h5 data-bind="text:CreatedAt"></h5>
+                <a class="btn btn-primary" data-toggle="collapse" data-bind="attr:{href:$parent.collapseHref}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Ответить
+                </a>
             </div>
             <div class="col-md-9">
-                <text>@comment.Text</text>
+                <p data-bind="text:Text"></p>
             </div>
         </div>
-    }
-    @if (User.Identity.IsAuthenticated)
-    {
-        @Html.Partial("~/Views/Movie/Partial/AddCommentPartialView.cshtml", new MovieCom.Web.Models.Movie.CommentViewModel { MovieId = Model.Id})
-    }
-    else
-    {
-        <p>Для того, чтобы оставить комментарий, необходимо авторизоваться.</p>
-    }
+        <div class="collapse" data-bind="attr:{id:Id}">
+            <div class="card card-body">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.Partial("~/Views/Movie/Partial/AddCommentPartialView.cshtml", new MovieCom.Web.Models.Movie.CommentViewModel { MovieId = Model.Id })
+                }
+                else
+                {
+                    <p>Для того, чтобы оставить комментарий, необходимо авторизоваться.</p>
+                }
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+    function CommentsViewModel() {
+        var self = this;
+        self.comments = ko.observableArray(@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@Model.Comments, Newtonsoft.Json.Formatting.Indented)));
+        self.reply = function(comment){
+        };
+        self.collapseHref = function(comment){
+            var link = '#' + comment.Id;
+            return link;
+        };
+    }
+    ko.applyBindings(new CommentsViewModel());
+</script>

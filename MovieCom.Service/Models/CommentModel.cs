@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MovieCom.Domain.Entities.Identity;
 using MovieCom.Service.Models.Base;
+using Newtonsoft.Json;
 
 namespace MovieCom.Service.Models
 {
@@ -13,10 +14,13 @@ namespace MovieCom.Service.Models
         public string Text { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastModifiedAt { get; set; }
+        [JsonIgnore]
         public MovieModel Movie { get; set; }
-        public User User { get; set; }
+        public UserModel User { get; set; }
         public Guid UserId { get; set; }
+        [JsonIgnore]
         public CommentModel ReplyTo { get; set; }
+        [JsonIgnore]
         public ICollection<CommentModel> Replies { get; set; }
     }
 }

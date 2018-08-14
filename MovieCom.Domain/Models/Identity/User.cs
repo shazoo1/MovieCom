@@ -8,6 +8,7 @@ using MovieCom.Domain.Models.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Security.Claims;
+using Newtonsoft.Json;
 
 namespace MovieCom.Domain.Entities.Identity
 {

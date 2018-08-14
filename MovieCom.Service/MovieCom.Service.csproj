@@ -89,6 +89,7 @@
     <Compile Include="Models\GradeModel.cs" />
     <Compile Include="Models\MediaModel.cs" />
     <Compile Include="Models\MovieModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ActorService.cs" />
     <Compile Include="Services\Base\BaseService.cs" />
